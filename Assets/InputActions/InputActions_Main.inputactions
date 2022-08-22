@@ -1,0 +1,127 @@
+{
+    "name": "InputActions_Main",
+    "maps": [
+        {
+            "name": "ActionMap_CharacterControl",
+            "id": "7148137d-7b56-44ee-8d89-67c1a86dcefb",
+            "actions": [
+                {
+                    "name": "LeftAxis_X",
+                    "type": "Value",
+                    "id": "bee921ab-40d5-4017-a325-2221838e3334",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "LeftAxis_Y",
+                    "type": "Value",
+                    "id": "9ad0058d-2a29-40f2-b2d3-66b6d154de87",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "f851665a-808a-4c2e-9d00-e74edc98be7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1DAxis_Horizontal[XboxController]",
+                    "id": "8fc2e610-5134-44e1-9e9b-c060699bec16",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftAxis_X",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b18af7c7-5c62-473d-bc2b-de2fbaa43eed",
+                    "path": "<XInputController>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "LeftAxis_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "0489559b-9d0f-431b-829c-43826c8e9345",
+                    "path": "<XInputController>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "LeftAxis_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis_Vertical[XboxController]",
+                    "id": "38df1172-0a0c-4492-ae86-f3c6f95e5f87",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftAxis_Y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "71f1cce6-9537-4482-82b7-b7ed58b0e28e",
+                    "path": "<XInputController>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "LeftAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "d6d24441-8661-4d5d-af83-1be3e943c95d",
+                    "path": "<XInputController>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "LeftAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "da7aa62c-4559-4c59-8ae1-5539106d3695",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "ControllerScheme_XboxController",
+            "bindingGroup": "ControllerScheme_XboxController",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
