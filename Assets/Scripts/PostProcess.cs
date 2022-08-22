@@ -20,3 +20,5 @@ public class PostProcess : MonoBehaviour
 	}
 }
 }
+
+///Resolution 320 x 240

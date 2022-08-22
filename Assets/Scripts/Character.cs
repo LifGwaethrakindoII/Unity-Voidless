@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Voidless
 {
+[RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
 	public const int STATE_FLAG_RUNNING = 1 << 0;
@@ -17,6 +18,17 @@ public class Character : MonoBehaviour
 	[SerializeField] private float backwardsMovementScalar; 			/// <summary>Backwards' Movement Scalar.</summary>
 	[SerializeField] private float rotationSpeed; 						/// <summary>Rotation's Speed.</summary>
 	private int state; 													/// <summary>State Flags.</summary>
+	private CharacterController _characterController; 					/// <summary>CharacterController's Component.</summary>
+
+	/// <summary>Gets characterController Component.</summary>
+	public CharacterController characterController
+	{ 
+		get
+		{
+			if(_characterController == null) _characterController = GetComponent<CharacterController>();
+			return _characterController;
+		}
+	}
 
 #region UnityMethods:
 	/// <summary>Character's instance initialization.</summary>
@@ -87,7 +99,9 @@ public class Character : MonoBehaviour
 			}
 			else blend = 1.0f;
 
-			transform.Translate(Vector3.forward * axes3D.magnitude * sign * movementSpeed * Time.deltaTime);
+			Vector3 displacement = transform.forward * (axes3D.magnitude * sign * movementSpeed * Time.deltaTime);
+			//transform.Translate(displacement);
+			characterController.Move(displacement);
 		}
 		else blend = -1.0f;
 
