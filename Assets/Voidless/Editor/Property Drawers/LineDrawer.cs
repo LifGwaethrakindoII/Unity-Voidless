@@ -163,7 +163,7 @@ public class LineDrawer : VPropertyDrawer
 		}
 		catch(Exception exception)
 		{
-			Debug.Log("[LineDrawer] Catched Exception when trying to reload SceneGUI: " + exception.Message);
+			//Debug.Log("[LineDrawer] Catched Exception when trying to reload SceneGUI: " + exception.Message);
 		}
 	}
 

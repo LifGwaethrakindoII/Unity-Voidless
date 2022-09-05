@@ -318,6 +318,50 @@ public static class VMath
 		return null;
 	}
 
+	/// <summary>Calculates the SoftMax function.</summary>
+	/// <param name="i">Index from the set to calculate.</param>
+	/// <param name="X">Set of values.</param>	
+	/// <returns>Softmax function for value on index i.</returns>
+	public static float SoftMax(int i, params float[] X)
+	{
+		float x = 0.0f;
+		float sum = 0.0f;
+
+		for(int j = 0; j < X.Length; j++)
+		{
+			float e = Mathf.Exp(X[j]);
+			sum += e;
+			if(i == j) x = e; 
+		}
+
+		return x / sum;
+	}
+
+	/// <summary>Calculates a SoftMax set given a set of values.</summary>
+	/// <param name="z">Set of values Z.</param>
+	/// <returns>Set of SoftMaxed values.</returns>
+	public static float[] SoftMax(params float[] z)
+	{
+		if(z == null || z.Length == 0) return null;
+
+		int l = z.Length;
+		float[] s = new float[l];
+		float sum = 0.0f;
+
+		for(int i = 0; i < l; i++)
+		{
+			s[i] = Mathf.Exp(z[i]);
+			sum += s[i];
+		}
+
+		for(int i = 0; i < l; i++)
+		{
+			s[i] = s[i] / sum;
+		}
+
+		return s;
+	}
+
 	/// <param name="t">Normalized Parameter T.</param>
 	/// <returns>T as it is.</returns>
 	public static float DefaultNormalizedPropertyFunction(float t) { return t; }
@@ -432,12 +476,20 @@ public static class VMath
 	}
 
 	/// <summary>Evaluates sigmoid function by given x.</summary>
-	/// <param name="_x">Number to evaluate.</param>
+	/// <param name="x">Number to evaluate.</param>
 	/// <param name="e">Exponential, 'e' constant by default.</param>
 	/// <returns>Sigmoid evaluation.</returns>
-	public static float Sigmoid(float _x, float e = E)
+	public static float Sigmoid(float x, float e = E)
 	{
-		return (1.0f / (1.0f + (1.0f / Mathf.Pow(e, _x))));
+		return (1.0f / (1.0f + (1.0f / Mathf.Pow(e, x))));
+	}
+
+	/// <summary>Evaluates sigmoid function by given x.</summary>
+	/// <param name="x">Number to evaluate.</param>
+	/// <returns>Sigmoid evaluation.</returns>
+	public static float Sigmoid(float x)
+	{
+		return (1.0f / (1.0f + (1.0f / Mathf.Exp(-x))));
 	}
 
 	public static float FunctionsSumatories(float _t, params NormalizedPropertyFunctionOC[] _functions)

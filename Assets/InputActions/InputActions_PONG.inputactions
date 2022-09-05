@@ -1,0 +1,338 @@
+{
+    "name": "InputActions_PONG",
+    "maps": [
+        {
+            "name": "ActionMap_CharacterControl",
+            "id": "7148137d-7b56-44ee-8d89-67c1a86dcefb",
+            "actions": [
+                {
+                    "name": "LeftAxis_X",
+                    "type": "Value",
+                    "id": "bee921ab-40d5-4017-a325-2221838e3334",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "LeftAxis_Y",
+                    "type": "Value",
+                    "id": "9ad0058d-2a29-40f2-b2d3-66b6d154de87",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RightAxis_X",
+                    "type": "Value",
+                    "id": "1037a0a0-c88e-4898-ad98-fb2547f10243",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RightAxis_Y",
+                    "type": "Value",
+                    "id": "5946cce0-c1df-4715-80f0-c560071913b8",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "f851665a-808a-4c2e-9d00-e74edc98be7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Action1",
+                    "type": "Button",
+                    "id": "04c56024-6263-4235-9625-54a2f913aab3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1DAxis_Horizontal[XboxController]",
+                    "id": "8fc2e610-5134-44e1-9e9b-c060699bec16",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftAxis_X",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b18af7c7-5c62-473d-bc2b-de2fbaa43eed",
+                    "path": "<XInputController>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "LeftAxis_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "0489559b-9d0f-431b-829c-43826c8e9345",
+                    "path": "<XInputController>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "LeftAxis_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis[Keyboard]",
+                    "id": "0616f878-bc4d-40f5-9147-b5c49f272a63",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftAxis_X",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "74dc2128-2c17-4a45-b5e8-16b71542dc6a",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "LeftAxis_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "6ba08318-bd41-48da-949e-356c669bc1b1",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "LeftAxis_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis_Vertical[XboxController]",
+                    "id": "38df1172-0a0c-4492-ae86-f3c6f95e5f87",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftAxis_Y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "71f1cce6-9537-4482-82b7-b7ed58b0e28e",
+                    "path": "<XInputController>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "LeftAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "d6d24441-8661-4d5d-af83-1be3e943c95d",
+                    "path": "<XInputController>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "LeftAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis[Keyboard]",
+                    "id": "8977cc5b-157d-44e1-b21c-6bb799af7aa0",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftAxis_Y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "c27319f9-ffe5-47e3-85af-0bd4ac928f21",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "LeftAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "546d320c-3bd5-4b0d-8d27-1c2427da034d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "LeftAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "da7aa62c-4559-4c59-8ae1-5539106d3695",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d42d7aff-45a8-4d01-ba0d-9474e7f3ebd1",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Action1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1DAxis[Keyboard]",
+                    "id": "131da2c7-cfab-419a-848a-1c027e28645e",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "RightAxis_X",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "107ef6f4-9dbb-4d19-a90d-ae4874877a0a",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "RightAxis_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "f01d6c10-4676-4eb8-9ccd-d3f9e56de6f0",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "RightAxis_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis[Keyboard]",
+                    "id": "1bba47c3-a0d4-4ff3-9091-167b7d80ba44",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightAxis_Y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "1edfad9a-b570-4491-be65-3be0f8102d9b",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "RightAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "489ddbfa-9977-46de-a627-0708f67c5485",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_Keyboard",
+                    "action": "RightAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis[XboxController]",
+                    "id": "7c6ebefa-3237-4d75-9b3c-94e36847bde7",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightAxis_Y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "fee33be6-d86b-449e-9e30-835a49388380",
+                    "path": "<XInputController>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9c733a20-04df-4914-a9aa-450978afefd7",
+                    "path": "<XInputController>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightAxis_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "ControllerScheme_XboxController",
+            "bindingGroup": "ControllerScheme_XboxController",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "ControllerScheme_Keyboard",
+            "bindingGroup": "ControllerScheme_Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

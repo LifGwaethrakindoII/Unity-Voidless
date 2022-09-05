@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Voidless
 {
@@ -17,8 +18,16 @@ public class Character : MonoBehaviour
 	[SerializeField] private float runScalar; 							/// <summary>Running's Scalar.</summary>
 	[SerializeField] private float backwardsMovementScalar; 			/// <summary>Backwards' Movement Scalar.</summary>
 	[SerializeField] private float rotationSpeed; 						/// <summary>Rotation's Speed.</summary>
+	private Renderer[] _renderers; 										/// <summary>Character's Renderers.</summary>
 	private int state; 													/// <summary>State Flags.</summary>
 	private CharacterController _characterController; 					/// <summary>CharacterController's Component.</summary>
+
+	/// <summary>Gets and Sets renderers property.</summary>
+	public Renderer[] renderers
+	{
+		get { return _renderers; }
+		set { _renderers = value; }
+	}
 
 	/// <summary>Gets characterController Component.</summary>
 	public CharacterController characterController
@@ -49,6 +58,22 @@ public class Character : MonoBehaviour
 		
 	}
 #endregion
+
+	[OnInspectorGUI("Get Renderers")]
+	private void GetRenderers()
+	{
+		renderers = GetComponentsInChildren<Renderer>();
+	}
+
+	public void EnableRenderers(bool _enable = true)
+	{
+		if(renderers == null || renderers.Length == 0) GetRenderers();
+
+		foreach(Renderer renderer in renderers)
+		{
+			renderer.gameObject.SetActive(_enable);
+		}
+	}
 
 	/// <summary>Goes Idle.</summary>
 	public void GoIdle()

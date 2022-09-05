@@ -160,6 +160,7 @@ public class VAnimatorController : MonoBehaviour
 		return true;
 	}
 
+	/// \TODO Create overloads to save time writting some parameters that not always are modified.
 	/// <summary>Cross-Fades towards Animation and waits until that next animation is finished.</summary>
 	/// <param name="_hash">AnimationState's Hash.</param>
 	/// <param name="_fadeDuration">Cross-Fade's Duration.</param>
@@ -195,7 +196,7 @@ public class VAnimatorController : MonoBehaviour
 		return true;
 	}
 
-	/// <summary>Cancels Cross-Fading's Routie on given layer.</summary>
+	/// <summary>Cancels Cross-Fading's Routine on given layer.</summary>
 	/// <param name="_layer">Animation's Layer.</param>
 	/// <returns>True if there was an active Cross-Fading to cancel.</returns>
 	public bool CancelCrossFading(int _layer = 0)

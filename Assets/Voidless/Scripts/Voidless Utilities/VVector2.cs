@@ -40,6 +40,23 @@ public static class VVector2
 		);
 	}
 
+	/// <summary>Rotates Vector Counter-Clockwise by given angle.</summary>
+	/// <param name="v">Vector to rotate.</param>
+	/// <param name="a">Rotation's Angle.</param>
+	/// <returns>Vector Rotates by a degrees.</returns>
+	public static Vector2 Rotate(this Vector3 v, float a)
+	{
+		a *= VMath.RAD_TO_DEG;
+
+		float sin = Mathf.Sin(a);
+		float cos = Mathf.Cos(a);
+
+		return new Vector2(
+			(v.x * cos) - (v.y * sin),
+			(v.x * sin) + (v.y * cos)
+		);
+	}
+
 #region ComponentFunctions:
 	/// <summary>Sets Vector2 X.</summary>
 	/// <param name="_vector">The Vector2 that will have its X modified.</param>
