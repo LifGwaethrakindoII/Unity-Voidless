@@ -288,7 +288,7 @@ public class ParticleEffect : MonoBehaviour, IPoolObject
 		}
 		else cooldowns.Add(instanceID, null);
 
-		cooldowns[instanceID] = this.StartBehaviorCoroutine(GetParticleSystemCooldown(_system.main.duration));
+		cooldowns[instanceID] = this.StartBehaviorCoroutine(GetParticleSystemCooldown(_system.main.duration + _system.main.startLifetime.constantMax));
 		cooldownsCount++;
 	}
 

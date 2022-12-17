@@ -122,8 +122,8 @@ public class GameObjectPool<T> : BaseObjectPool<T> where T : MonoBehaviour, IPoo
 	}
 
 	/// <summary>Creates an array of GameObjectPools from an array of PoolGameObjects.</summary>
-	/// <param name="_objects">Array of PoolGameObjects.</param>
 	/// <param name="_size">Default Pools' Size.</param>
+	/// <param name="_objects">Array of PoolGameObjects.</param>
 	/// <returns>Array of GameObjectPools from array of PoolGameObjects.</returns>
 	public static GameObjectPool<T>[] PopulatedPools(int _size = 1, params T[] _objects)
 	{
@@ -139,6 +139,24 @@ public class GameObjectPool<T> : BaseObjectPool<T> where T : MonoBehaviour, IPoo
 		}
 
 		return pools;
+	}
+
+	/// <summary>Creates a Dictionary of GameObjectPools from array of PoolGameObjects.</summary>
+	/// <param name="_size">Default Pools' Size [1 by default].</param>
+	/// <param name="_references">Array of PoolGameObjects.</param>
+	/// <returns>Dictionary of GameObjectPools from array of PoolGameObjects.</returns>
+	public static Dictionary<int, GameObjectPool<T>> PopulatedPoolsDictionary(int _size = 1, params T[] _references)
+	{
+		if(_references == null || _references.Length == 0) return null;
+
+		Dictionary<int, GameObjectPool<T>> poolsDictionary = new Dictionary<int, GameObjectPool<T>>();
+
+		foreach(T reference in _references)
+		{
+			poolsDictionary.Add(reference.GetInstanceID(), new GameObjectPool<T>(reference, _size));
+		}
+
+		return poolsDictionary;
 	}
 }
 }

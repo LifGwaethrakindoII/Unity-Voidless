@@ -158,6 +158,12 @@ public class SerializableDictionary<K, V> : Dictionary<K, V>, ISerializationCall
 
 [Serializable] public struct StringArray { public string[] array; }
 
+// Char Key Dictionaries:
+[Serializable] public class CharKeyDictionary<V> : SerializableDictionary<char, V> { /*...*/ }
+[Serializable] public class CharFloatDictionary : CharKeyDictionary<float> { /*...*/ }
+[Serializable] public class CharTransformDictionary : CharKeyDictionary<Transform> { /*...*/ }
+[Serializable] public class CharAudioClipDictionary : CharKeyDictionary<AudioClip> { /*...*/ }
+
 // String Key Dictionaries:
 [Serializable] public class StringStringDictionary : StringKeyDictionary<string> { /*...*/ }
 //[Serializable] public class StringStringArrayDictionary : StringKeyDictionary<string[]> { /*...*/ }

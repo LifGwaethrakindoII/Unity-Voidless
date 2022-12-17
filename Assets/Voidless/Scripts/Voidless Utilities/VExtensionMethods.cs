@@ -303,5 +303,24 @@ public static class VExtensionMethods
 	{
 		return UnityEngine.Object.FindObjectsOfType<GameObject>();
 	}
+
+	/// <summary>Retreives component from this object or its parents.</summary>
+	/// <param name="obj">Main GameObject's reference.</param>
+	/// <returns>Retreived component, if existing.</returns>
+	public static T GetComponentHereOrInParent<T>(this GameObject obj) where T : class
+	{
+		T result = null;
+
+		while(obj != null)
+		{
+			result = obj.GetComponent<T>();
+
+			if(result != null) return result;
+
+			obj = obj.transform.parent.gameObject;
+		}
+
+		return null;
+	}
 }
 }

@@ -48,6 +48,18 @@ public class Boundaries2DContainer : MonoBehaviour
 	/// <summary>Gets max property.</summary>
 	public Vector3 max { get { return center + (size * 0.5f); } }
 
+	/// <summary>Gets Bottom-Left Point.</summary>
+	public Vector3 bottomLeftPoint { get { return min; } }
+
+	/// <summary>Gets Bottom-Right Point.</summary>
+	public Vector3 bottomRightPoint { get { return new Vector3(max.x, min.y, min.z); } }
+
+	/// <summary>Gets Top-Left Point.</summary>
+	public Vector3 topLeftPoint { get { return new Vector3(min.x, max.y, min.z); } }
+
+	/// <summary>Gets Top-Right Point.</summary>
+	public Vector3 topRightPoint { get { return max; } }
+
 #if UNITY_EDITOR
 	/// <summary>Draws Gizmos on Editor mode.</summary>
 	private void OnDrawGizmos()
@@ -90,6 +102,64 @@ public class Boundaries2DContainer : MonoBehaviour
 			UnityEngine.Random.Range(m.y, M.y),
 			UnityEngine.Random.Range(m.z, M.z)
 		);
+	}
+
+	/// <returns>Random point on any of the bounrady's edges.</returns>
+	public Vector2 RandomOnEndge()
+	{
+		ValueVTuple<Vector2, Vector2> edge = RandomEdge();
+		float t = UnityEngine.Random.Range(0.0f, 1.0f);
+
+		return Vector2.Lerp(edge.Item1, edge.Item2, t);
+	}
+
+	/// <summary>Gets a random point outside boundaries.</summary>
+	/// <param name="d">Distance from boundaries' edges [internally set to absolute value].</param>
+	/// <returns>Random point outside boundaries.</returns>
+	public Vector2 RandomOutside(float m, float M)
+	{
+		m = Mathf.Abs(m);
+		M = Mathf.Abs(M);
+
+		ValueVTuple<Vector2, Vector2> edge = RandomEdge();
+		Vector2 s = Vector2.Lerp(edge.Item1, edge.Item2, UnityEngine.Random.Range(0.0f, 1.0f));
+		Vector2 n = Vector2.Lerp(edge.Item1, edge.Item2, 0.5f) - (Vector2)center;
+		n *= UnityEngine.Random.Range(m, M);
+
+		//Debug.DrawRay(s, n, Color.magenta, 3.0f);
+
+		return s + n;
+	}
+
+	/// <returns>Random Edge [as a Tuple].</returns>
+	public ValueVTuple<Vector2, Vector2> RandomEdge()
+	{
+		ValueVTuple<Vector2, Vector2> edge = default(ValueVTuple<Vector2, Vector2>);
+
+		switch(UnityEngine.Random.Range(0, 4))
+		{
+			case 0:
+				edge.Item1 = bottomLeftPoint;
+				edge.Item2 = bottomRightPoint;
+			break;
+
+			case 1:
+				edge.Item1 = bottomLeftPoint;
+				edge.Item2 = topLeftPoint;
+			break;
+
+			case 2:
+				edge.Item1 = topLeftPoint;
+				edge.Item2 = topRightPoint;
+			break;
+
+			case 3:
+				edge.Item1 = bottomRightPoint;
+				edge.Item2 = topRightPoint;
+			break;
+		}
+
+		return edge;
 	}
 
 	/// <summary>Gets containment steering forces of vehicle inside boundaries container.</summary>
@@ -257,6 +327,75 @@ public class Boundaries2DContainer : MonoBehaviour
 		return c;
 	}
 
+	/// <summary>Evaluates if point is inside boundaries.</summary>
+	/// <param name="p">Point to evaluate.</param>
+	public bool Inside(Vector2 p)
+	{
+		return p.x > min.x && p.x < max.x && p.y > min.y && p.y < max.y;
+	}
+
+	/// <summary>Evaluates if point is outside boundaries.</summary>
+	/// <param name="p">Point to evaluate.</param>
+	public bool Outside(Vector2 p)
+	{
+		return p.x < min.x || p.x > max.x || p.y < min.y || p.y > max.y;
+	}
+
+	/// <summary>Calculates Boundary's Area.</summary>
+	/// <param name="_ignore">Ignore Z-Axis? true bu default.</param>
+	public float GetArea(bool _ignoreZ = true)
+	{
+		Vector3 d = max - min;
+		float a = d.x * d.y;
+
+		if(!_ignoreZ) a *= d.z;
+
+		return a;
+	}
+
+	/// <summary>Clamps point inside boundaries.</summary>
+	/// <param name="p">Point to clamp.</param>
+	public Vector2 Clamp(Vector2 p)
+	{
+		Vector2 m = min;
+		Vector2 M = max;
+
+		return new Vector2(
+			Mathf.Clamp(p.x, m.x, M.x),
+			Mathf.Clamp(p.y, m.y, M.y)
+		);
+	}
+
+	/// <summary>Gets reciprocal point relative to boundaries.</summary>
+	/// <param name="p">Reference point.</param>
+	public Vector2 GetReciprocalPoint(Vector2 p)
+	{
+		p = Clamp(p);
+
+		Vector2 m = min;
+		Vector2 M = max;
+		Vector2 c = center;
+		Vector2 d = p - c;
+		Vector2 r = c - d; // Reciprocal inverse...
+
+		return new Vector2(
+			p.x <= m.x || p.x >= M.x ? p.x : r.x,
+			p.y <= m.y || p.y >= M.y ? p.y : r.y
+		);
+	}	
+
+	/// <summary>Gets reciprocal inverse point relative to boundaries.</summary>
+	/// <param name="p">Reference point.</param>
+	public Vector2 GetReciprocalInversePoint(Vector2 p)
+	{
+		p = Clamp(p);
+
+		Vector2 c = center;
+		Vector2 d = p - c;
+
+		return c - d;
+	}
+
 	/// <summary>Lerps Between Container A and B.</summary>
 	/// <param name="a">Boundaries2DContainer A.</param>
 	/// <param name="b">Boundaries2DContainer B.</param>
@@ -340,6 +479,38 @@ public class Boundaries2DContainer : MonoBehaviour
 
 		Set(b);
 		if(onInterpolationEnds != null) onInterpolationEnds();
+	}
+
+	/// <summary>Iterates through boundaries' corners [as Vector3].</summary>
+	public IEnumerator<Vector3> IterateThroughCorners()
+	{
+		yield return min;
+		yield return new Vector3(min.x, max.y, min.z);
+		yield return max;
+		yield return new Vector3(max.x, min.y, min.z);
+	}
+
+	/// <summary>Iterates through boundaries' corners [as Vector2].</summary>
+	public IEnumerator<Vector2> IterateThroughCorners2D()
+	{
+		yield return min;
+		yield return new Vector2(min.x, max.y);
+		yield return max;
+		yield return new Vector2(max.x, min.y);
+	}
+
+	/// <summary>Iterates through boundaries' edges.</summary>
+	public IEnumerator<ValueVTuple<Vector2, Vector2>> IterateThroughEdges()
+	{
+		Vector3 bottomLeftPoint = min;
+		Vector3 bottomRightPoint = new Vector3(max.x, min.y, min.z);
+		Vector3 topLeftPoint = new Vector3(min.x, max.y, min.z);
+		Vector3 topRightPoint = max;
+
+		yield return new ValueVTuple<Vector2, Vector2>(bottomLeftPoint, topLeftPoint);
+		yield return new ValueVTuple<Vector2, Vector2>(bottomLeftPoint, bottomRightPoint);
+		yield return new ValueVTuple<Vector2, Vector2>(topLeftPoint, topRightPoint);
+		yield return new ValueVTuple<Vector2, Vector2>(bottomRightPoint, topRightPoint);
 	}
 }
 }

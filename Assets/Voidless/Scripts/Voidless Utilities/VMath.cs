@@ -270,10 +270,22 @@ public static class VMath
 #endregion
 
 #region Easings:
+	/// <returns>Ease-In Sine for Normalized Time t.</returns>
+	public static float EaseInSine(float t)
+	{
+		return 1.0f - Mathf.Cos(t * PI * 0.5f);
+	}
+
 	/// <returns>Ease-In Quad for Normalized Time t.</returns>
 	public static float EaseInQuad(float t)
 	{
 		return t * t;
+	}
+
+	/// <returns>Ease-In Cubic for Normalized Time t.</returns>
+	public static float EaseInCubic(float t)
+	{
+		return t * t * t;
 	}
 
 	/// <returns>Ease-In Back for Normalized Time t.</returns>
@@ -1011,13 +1023,13 @@ public static class VMath
 
 #region Ray2DOperations:
 	/// <summary>Calculates a 2X2 determinant, given two bidimensional Rays.</summary>
-	/// <param name="_rayA">Ray A.</param>
-	/// <param name="_rayB">Ray B.</param>
+	/// <param name="a">Ray A.</param>
+	/// <param name="b">Ray B.</param>
 	/// <returns>2X2's determinant of Ray A and Ray B.</returns>
-	public static float Determinant(Ray2D _rayA, Ray2D _rayB)
+	public static float Determinant(Ray2D a, Ray2D b)
 	{
-		return ((_rayA.direction.y * _rayB.direction.x) - (_rayA.direction.x * _rayB.direction.y));
-		//return ((_rayB.direction.x * _rayA.direction.y) - (_rayB.direction.y * _rayA.direction.x));
+		return ((a.direction.y * b.direction.x) - (a.direction.x * b.direction.y));
+		//return ((b.direction.x * a.direction.y) - (b.direction.y * a.direction.x));
 	}
 
 	/// <summary>Interpolates ray towards direction, given a time t.</summary>
@@ -1030,20 +1042,20 @@ public static class VMath
 	}
 
 	/// <summary>Calculates for intersection between Ray A and B.</summary>
-	/// <param name="_rayA">Ray A.</param>
-	/// <param name="_rayB">Ray B.</param>
+	/// <param name="a">Ray A.</param>
+	/// <param name="b">Ray B.</param>
 	/// <returns>Intersection between Rays A and B if there is, null otherwise.</returns>
-	public static Vector2? CalculateIntersectionBetween(Ray2D _rayA, Ray2D _rayB)
+	public static Vector2? CalculateIntersectionBetween(Ray2D a, Ray2D b)
 	{
-		float determinant = Determinant(_rayA, _rayB);
+		float determinant = Determinant(a, b);
 		if(determinant == 0.0f) return null;
 		float determinantMultiplicativeInverse = (1.0f / determinant);
-		float deltaX = (_rayA.origin.x - _rayB.origin.x);
-		float deltaY = (_rayB.origin.y - _rayA.origin.y);
-		float tA = ((deltaY * _rayB.direction.x) + (deltaX * _rayB.direction.y)) * determinantMultiplicativeInverse;
-		float tB = ((deltaY * _rayA.direction.x) + (deltaX * _rayA.direction.y)) * determinantMultiplicativeInverse;
+		float deltaX = (a.origin.x - b.origin.x);
+		float deltaY = (b.origin.y - a.origin.y);
+		float tA = ((deltaY * b.direction.x) + (deltaX * b.direction.y)) * determinantMultiplicativeInverse;
+		float tB = ((deltaY * a.direction.x) + (deltaX * a.direction.y)) * determinantMultiplicativeInverse;
 
-		return (tA >= 0.0f && tB >= 0.0f) ? _rayA.Lerp(tA) : (Vector2?)null;
+		return (tA >= 0.0f && tB >= 0.0f) ? a.Lerp(tA) : (Vector2?)null;
 	}
 #endregion
 
@@ -1295,6 +1307,83 @@ public static class VMath
 	public static long Clamp(long x, long min, long max)
 	{
 		return x < min ? min : x > max ? max : x;
+	}
+#endregion
+
+#region AreasVolumes&Perimeters:
+	/// <summary>Calculates radius from given area.</summary>
+	/// <param name="a">Area.</param>
+	/// <returns>Radius from given area.</returns>
+	public static float RadiusFromArea(float a)
+	{
+		return Mathf.Sqrt(a / Mathf.PI);
+	}
+
+	/// <summary>Calculates the area of a circle.</summary>
+	/// <param name="r">Circle's Radius.</param>
+	/// <returns>Circle's Area.</returns>
+	public static float AreaOfCircle(float r)
+	{
+		return Mathf.PI * (r * r);
+	}
+
+	/// <summary>Calculates the area of an ellipse [it does not matter the order of factors, they commute].</summary>
+	/// <param name="a">Radius A.</param>
+	/// <param name="b">Radius B.</param>
+	/// <returns>Ellipse's Area.</returns>
+	public static float AreaOfEllipse(float a, float b)
+	{
+		return Mathf.PI * (a * b);
+	}
+
+	/// <summary>Calculates the area of a sphere.</summary>
+	/// <param name="r">Sphere's Radius.</param>
+	/// <returns>Sphere's Volume.</returns>
+	public static float VolumeOfASphere(float r)
+	{
+		float x = 1.3333333333333333333333333333333333333333333333f; // 4/3
+		return x * Mathf.PI * (r * r * r);
+	}
+
+	/// <summary>Calculates the area of an irregular triangle using Heron's formula.</summary>
+	/// <param name="a">Point of triangle A.</param>
+	/// <param name="b">Point of triangle B.</param>
+	/// <param name="c">Point of triangle C.</param>
+	/// <returns>Area of irregular triangle.</returns>
+	public static float AreaOfIrregularTriangle(Vector2 a, Vector2 b, Vector2 c)
+	{
+		return AreaOfIrregularTriangle(
+			(a - b).magnitude,
+			(b - c).magnitude,
+			(a - c).magnitude
+		);
+	}
+
+	/// <summary>Calculates the area of an irregular triangle using Heron's formula.</summary>
+	/// <param name="a">Point of triangle A.</param>
+	/// <param name="b">Point of triangle B.</param>
+	/// <param name="c">Point of triangle C.</param>
+	/// <returns>Area of irregular triangle.</returns>
+	public static float AreaOfIrregularTriangle(Vector3 a, Vector3 b, Vector3 c)
+	{
+		return AreaOfIrregularTriangle(
+			(a - b).magnitude,
+			(b - c).magnitude,
+			(a - c).magnitude
+		);
+	}
+
+	/// <summary>Calculates the area of an irregular triangle using Heron's formula.</summary>
+	/// <param name="a">Length of side A.</param>
+	/// <param name="b">Length of side B.</param>
+	/// <param name="c">Length of side C.</param>
+	/// <returns>Area of irregular triangle.</returns>
+	public static float AreaOfIrregularTriangle(float a, float b, float c)
+	{
+		// Semi-Perimeter:
+		float s = (a + b + c) * 0.5f;
+
+		return Mathf.Sqrt((s * (s - a)) * (s * (s - b)) * (s * (s - c)));
 	}
 #endregion
 

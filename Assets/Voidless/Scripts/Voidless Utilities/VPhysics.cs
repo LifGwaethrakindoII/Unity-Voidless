@@ -7,6 +7,29 @@ namespace Voidless
 {
 public static class VPhysics
 {
+	/// <summary>Calculates resulting velocity of 2 colliding Rigidbodies.</summary>
+	/// <param name="va">Velocity A.</param>
+	/// <param name="vb">Velocity B.</param>
+	/// <param name="ma">A's Mass [1.0f by default].</param>
+	/// <param name="mb">B's Mass [1.0f by default].</param>
+	/// <returns>Resulting velocity for each Rigidbody [as a Vector3 Tuple].</returns>
+	public static ValueVTuple<Vector3, Vector3> CollisionResolution(Vector3 va, Vector3 vb, float ma = 1.0f, float mb = 1.0f)
+	{
+		Vector3 vaf = (va * ((ma - mb) / (ma + mb))) + (vb * ((2.0f * mb) / (ma + mb)));
+		Vector3 vbf = (va * ((2.0f * ma) / (ma + mb))) + (vb * ((mb - ma) / (ma + mb)));
+
+		return new ValueVTuple<Vector3, Vector3>(vaf, vbf);
+	}
+
+	/// <summary>Calculates resulting velocity of 2 colliding Rigidbodies.</summary>
+	/// <param name="a">Rigidbody A.</param>
+	/// <param name="b">Rigidbody B.</param>
+	/// <returns>Resulting velocity for each Rigidbody [as a Vector3 Tuple].</returns>
+	public static ValueVTuple<Vector3, Vector3> CollisionResolution(Rigidbody a, Rigidbody b)
+	{
+		return CollisionResolution(a.velocity, b.velocity, a.mass, b.mass);
+	}
+
 	/// <summary>Gets a list of Components inside an overlapping Sphere.</summary>
 	/// <param name="_origin">Sphere's Origin.</param>
 	/// <param name="_radius">Sphere's Radius.</param>
@@ -76,20 +99,11 @@ public static class VPhysics
 	{
 		switch(_forceMode)
 		{
-			case ForceMode.Force:
-			return (_force / _body.mass) * Time.fixedDeltaTime;
-			break;
-
-			case ForceMode.Acceleration:
-			return _force * Time.fixedDeltaTime;
-			break;
-
-			case ForceMode.Impulse:
-			return (_force / _body.mass);
-			break;
+			case ForceMode.Force: 			return (_force / _body.mass) * Time.fixedDeltaTime;
+			case ForceMode.Acceleration: 	return _force * Time.fixedDeltaTime;
+			case ForceMode.Impulse: 		return (_force / _body.mass);
+			default: 						return _force;
 		}
-
-		return _force;
 	}
 
 	/// <summary>Calculates a projectile's projection given a time t [pf = (g * (t^2/2)) + (v0 * t) + p0].</summary>
@@ -125,14 +139,12 @@ public static class VPhysics
 		switch(f)
 		{
 			case ForceMode.Force:
-			case ForceMode.Acceleration:
-			return v * t * Time.fixedDeltaTime;
+			case ForceMode.Acceleration: 	return v * t * Time.fixedDeltaTime;
 
 			case ForceMode.Impulse:
-			case ForceMode.VelocityChange:
-			return v * t;
+			case ForceMode.VelocityChange: 	return v * t;
 
-			default: return v;
+			default: 						return v;
 		}
 	}
 

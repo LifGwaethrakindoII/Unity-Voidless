@@ -25,11 +25,11 @@ public static class VVector2
 
 	/// <summary>Rotates Vector Counter-Clockwise by given angle.</summary>
 	/// <param name="v">Vector to rotate.</param>
-	/// <param name="a">Rotation's Angle.</param>
+	/// <param name="a">Rotation's Angle [in degrees].</param>
 	/// <returns>Vector Rotates by a degrees.</returns>
 	public static Vector2 Rotate(this Vector2 v, float a)
 	{
-		a *= VMath.RAD_TO_DEG;
+		a *= VMath.DEG_TO_RAD;
 
 		float sin = Mathf.Sin(a);
 		float cos = Mathf.Cos(a);
@@ -42,11 +42,11 @@ public static class VVector2
 
 	/// <summary>Rotates Vector Counter-Clockwise by given angle.</summary>
 	/// <param name="v">Vector to rotate.</param>
-	/// <param name="a">Rotation's Angle.</param>
+	/// <param name="a">Rotation's Angle [in degrees].</param>
 	/// <returns>Vector Rotates by a degrees.</returns>
 	public static Vector2 Rotate(this Vector3 v, float a)
 	{
-		a *= VMath.RAD_TO_DEG;
+		a *= VMath.DEG_TO_RAD;
 
 		float sin = Mathf.Sin(a);
 		float cos = Mathf.Cos(a);

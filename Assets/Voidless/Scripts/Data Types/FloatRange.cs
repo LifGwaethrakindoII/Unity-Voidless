@@ -28,6 +28,18 @@ public struct FloatRange : IRange<float>, ISerializationCallbackReceiver
 	/// <summary>Implicit float value to FloatRange operator.</summary>
 	public static implicit operator FloatRange(float _value) { return new FloatRange(_value); }
 
+	/// <summary>FloatRange plus FloatRange operator.</summary>
+	public static FloatRange operator + (FloatRange a, FloatRange b) { return new FloatRange(a.Min() + b.Min(), a.Max() + b.Max()); }
+
+	/// <summary>FloatRange minus FloatRange operator.</summary>
+	public static FloatRange operator - (FloatRange a, FloatRange b) { return new FloatRange(a.Min() - b.Min(), a.Max() - b.Max()); }
+
+	/// <summary>FloatRange times scalar operator.</summary>
+	public static FloatRange operator * (FloatRange r, float x) { return new FloatRange(r.Min() * x, r.Max() * x); }
+
+	/// <summary>FloatRange divideed by scalar operator.</summary>
+	public static FloatRange operator / (FloatRange r, float x) { return new FloatRange(r.Min() / x, r.Max() / x); }
+
 	/// <summary>FloatRange's Constructor.</summary>
 	/// <param name="_min">Minimum's value.</param>
 	/// <param name="_max">Maximum's value.</param>
@@ -49,6 +61,21 @@ public struct FloatRange : IRange<float>, ISerializationCallbackReceiver
 		float M = Max();
 		
 		return m + ((M - m) * t);
+	}
+
+	/// <summary>Interpolates between 2 given FloatRanges.</summary>
+	/// <param name="a">FloatRange A.</param>
+	/// <param name="b">FloatRange B.</param>
+	/// <param name="t">Time t [internally clamped].</param>
+	/// <returns>Interpolation between 2 FloatRanges.</returns>
+	public static FloatRange Lerp(FloatRange a, FloatRange b, float t)
+	{
+		t = Mathf.Clamp(t, 0.0f, 1.0f);
+
+		return new FloatRange(
+			Mathf.Lerp(a.Min(), b.Min(), t),
+			Mathf.Lerp(a.Max(), b.Max(), t)
+		);
 	}
 
 	/// <returns>Range's Median.</returns>

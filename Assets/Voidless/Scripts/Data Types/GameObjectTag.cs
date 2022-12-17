@@ -75,5 +75,23 @@ public struct GameObjectTag
 
 	/// <returns>GameObject's Tag.</returns>
 	public override string ToString() { return tag; }
+
+	/// <summary>Performs callback if GameObject's tag is on GameObjectTags.</summary>
+	/// <param name="obj">GameObject to compare.</param>
+	/// <param name="tags">Tags to compare with GameObject's tag.</param>
+	/// <param name="onTagEqual">Callback invoked if any on the tags on the array matches.</param>
+	public static void DoIfGameObjectTagMatches(GameObject obj, GameObjectTag[] tags, Action onTagEqual)
+	{
+		if(obj == null || tags == null) return;
+
+		foreach(GameObjectTag tag in tags)
+		{
+			if(obj.CompareTag(tag))
+			{
+				if(onTagEqual != null) onTagEqual();
+				return;
+			}
+		}
+	}
 }
 }

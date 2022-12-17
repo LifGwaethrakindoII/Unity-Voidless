@@ -740,6 +740,65 @@ public static class VCoroutines
 		}
 	}
 
+	/// <summary>Oscillates habilitation of Renderer.</summary>
+	/// <param name="_renderer">Renderer's reference.</param>
+	/// <param name="_duration">Oscillation duration.</param>
+	/// <param name="_cycles">Oscillation Cycles.</param>
+	/// <param name="onOscillationEnds">Callback optionally invoked when oscillation ends.</param>
+	public static IEnumerator OscillateRendererActivation(this Renderer _renderer, float _duration, float _cycles, Action onOscillationEnds = null)
+	{
+		_cycles = Mathf.Floor(_cycles);
+
+		float time = _duration / (_cycles * 2.0f);
+		float inverseDuration = 1.0f / time;
+		float n = 0.0f;
+		float t = 0.0f;
+
+		while(n < _cycles)
+		{
+			while(t < 1.0f)
+			{
+				t += (Time.deltaTime * inverseDuration);
+				yield return null;
+			}
+
+			n++;
+			t = 0.0f;
+			_renderer.enabled = !_renderer.enabled;
+		}
+
+		_renderer.enabled = true;
+	}
+
+	/// <summary>Oscilates Material's Material Main Color between its original and a desired color, interpolating back and forth.</summary>
+	/// <param name="_material">Material to apply the Colro oscillation effect.</param>
+	/// <param name="_color">Desired Color.</param>
+	/// <param name="_duration">Oscillation process's duration.</param>
+	/// <param name="_cycles">Number of back and forth cycles during the oscillation.</param>
+	/// <param name="_propertyTag">Property tag referrinf to the color ["_Color" as default].</param>
+	/// <param name="onColorOscillation">Optional callback invoked when the effect ends.</param>
+	public static IEnumerator OscillateMaterialColor(this Material _material, Color _color, float _duration, float _cycles, string _propertyTag = "_Color", Action onColorOscillationEnds = null)
+	{
+		FloatRange sinRange = new FloatRange(-1.0f, 1.0f);
+		int propertyID = Shader.PropertyToID(_propertyTag);
+		Color originalColor = _material.GetColor(propertyID);
+		Color newColor = new Color(0f, 0f, 0f, 0f);
+		float inverseDuration = 1.0f / _duration;
+		float t = 0.0f;
+		float x = (360f * _cycles * Mathf.Deg2Rad);
+
+		while(t < (1.0f + Mathf.Epsilon))
+		{
+			newColor = Color.Lerp(originalColor, _color, VMath.RemapValueToNormalizedRange(Mathf.Sin(t * x), sinRange));
+			_material.SetColor(propertyID, newColor);
+			t += (Time.deltaTime * inverseDuration);
+			yield return null;
+		}
+
+		_material.SetColor(propertyID, originalColor);
+		if(onColorOscillationEnds != null) onColorOscillationEnds();
+	}
+
 	/// <summary>Oscilates Renderer's Material Main Color between its original and a desired color, interpolating back and forth.</summary>
 	/// <param name="_renderer">Renderer to apply the Colro oscillation effect.</param>
 	/// <param name="_color">Desired Color.</param>
@@ -884,25 +943,28 @@ public static class VCoroutines
 	}
 
 	/// <summary>Runs multiple IEnumerators.</summary>
+	/// <param name="onFinished">Callback optionally invoked after all the iterations are finished.</param>
 	/// <param name="_iterators">Set of Iterators.</param>
-	public static IEnumerator RunMultipleIterators(params IEnumerator[] _iterators)
+	public static IEnumerator RunMultipleIterators(Action onFinished = null, params IEnumerator[] _iterators)
 	{
 		if(_iterators == null) yield break;
 
-		int finishedIterators = 0;
 		int interatorsLength = _iterators.Length;
+		HashSet<int> finishedIterators = new HashSet<int>();
 
-		while(finishedIterators < interatorsLength)
+		while(finishedIterators.Count < interatorsLength)
 		{
-			finishedIterators = 0;
-
-			foreach(IEnumerator iterator in _iterators)
+			for(int i = 0; i < interatorsLength; i++)
 			{
-				if(!iterator.MoveNext()) finishedIterators++;
+				if(finishedIterators.Contains(i)) continue;
+
+				if(!_iterators[i].MoveNext()) finishedIterators.Add(i);
 			}
 
 			yield return null;
 		}
+
+		if(onFinished != null) onFinished();
 	}
 
 	/// <summary>Plays Animator's State and waits for that state to end.</summary>

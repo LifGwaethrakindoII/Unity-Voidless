@@ -1,0 +1,10 @@
+This Videogame uses these sounds from freesound:
+"sound1" by user1 ( http://freesound.org/s/soundID/ ) licensed under CCBYNC 4.0
+"sound2", "sound3" by user2 ( http://freesound.org/people/user2/ ) licensed under CCBY 4.0
+etc..
+
+https://freesound.org/search/?q=retro+shot&f=&w=&s=Duration+%28short+first%29&advanced=0&g=1
+https://freesound.org/people/Jerimee/sounds/527527/
+https://freesound.org/people/MATRIXXX_/sounds/523769/
+https://freesound.org/people/MATRIXXX_/sounds/523769/
+https://freesound.org/people/Joao_Janz/sounds/478328/

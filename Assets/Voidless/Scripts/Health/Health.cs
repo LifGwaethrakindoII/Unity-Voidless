@@ -2,6 +2,7 @@ using System.Collections;
 using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Voidless
 {
@@ -36,6 +37,7 @@ public class Health : MonoBehaviour, IStateMachine
     public const int ID_STATE_ONHITSTUN = 1 << 0;               /// <summary>On Hit-Stun State's ID.</summary>
     public const int ID_STATE_ONINVINCIBILITY = 1 << 1;         /// <summary>On Invincibility State's ID.</summary>
 
+    [InfoBox("@ToString()")]
     [SerializeField] private float _maxHP;                      /// <summary>Maximum amount of Health.</summary>
     [SerializeField] private float _hitStunDuration;            /// <summary>Cooldown duration when on Hit-Stun mode.</summary>
     [SerializeField] private float _invincibilityDuration;      /// <summary>Cooldown duration when on Invincible mode.</summary>
@@ -262,13 +264,15 @@ public class Health : MonoBehaviour, IStateMachine
         StringBuilder builder = new StringBuilder();
 
         builder.AppendLine("Health: \n{");
-        builder.Append("\tCurrent HP: ");
-        builder.AppendLine(hp.ToString());
         builder.Append("\tMax HP: ");
         builder.AppendLine(maxHP.ToString());
 
         if(Application.isPlaying)
         {
+            builder.Append("\tCurrent HP: ");
+            builder.AppendLine(hp.ToString());
+            builder.Append("\tHP Ratio (HP / MaxHP): ");
+            builder.AppendLine(hpRatio.ToString());
             builder.Append("\tOn Hit-Stun: ");
             builder.AppendLine(onHitStun.ToString());
             builder.Append("\tOn Invincibility: ");

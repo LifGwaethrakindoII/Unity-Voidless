@@ -10,6 +10,7 @@ public class DisplacementAccumulator2D : MonoBehaviour
 {
 	private Vector2 _velocity; 			/// <summary>Accumulator's Velocity.</summary>
 	private Rigidbody2D _rigidbody; 	/// <summary>Rigidbody's Component.</summary>
+	private Coroutine coroutine; 		/// <summary>coroutine's reference.</summary>
 
 	/// <summary>Gets and Sets velocity property.</summary>
 	public Vector2 velocity
@@ -28,11 +29,22 @@ public class DisplacementAccumulator2D : MonoBehaviour
 		}
 	}
 
+	/// <summary>Callback invoked when DisplacementAccumulator2D's instance is enabled.</summary>
+	private void OnEnable()
+	{
+		if(coroutine == null) this.StartCoroutine(WaitForEndOfPhysicsThread(), ref coroutine);
+	}
+
+	/// <summary>Callback invoked when DisplacementAccumulator2D's instance is disabled.</summary>
+	private void OnDisable()
+	{
+		this.DispatchCoroutine(ref coroutine);
+	}
+
 	/// <summary>DisplacementAccumulator's instance initialization.</summary>
 	private void Awake()
 	{
 		velocity = Vector2.zero;
-		this.StartCoroutine(WaitForEndOfPhysicsThread());
 	}
 
 	/// <summary>Callback invoked at the end of the Physics Step.</summary>

@@ -109,6 +109,24 @@ public class VCameraViewportHandler : VCameraComponent, IEnumerable<Vector3>
 		));
 	}
 
+	/// <summary>Updates Boundaries' Size so it matches with Camera's Viewport.</summary>
+	/// <param name="_camera">Camera's reference.</param>
+	/// <param name="z">Z's Value [distance between boundaries container and the camera...].</param>
+	/// <param name="boundariesContainer">BoundariesContainer's reference.</param>
+	public static void UpdateBoundaries(Camera _camera, float z, Boundaries2DContainer boundariesContainer)
+	{
+		CameraViewportPlane plane = default(CameraViewportPlane);
+		UpdateViewportPlane(_camera, z, ref plane);
+
+		float x = (plane.bottomRightPoint - plane.bottomLeftPoint).magnitude;
+		float y = (plane.bottomRightPoint - plane.topRightPoint).magnitude;
+		Vector3 size = boundariesContainer.size;
+
+		size.x = x;
+		size.y = y;
+		boundariesContainer.size = size;
+	}
+
 	/// <summary>Evaluates if given point is within focus area.</summary>
 	/// <param name="_point">Point to evaluate.</param>
 	/// <param name="_axes">Axes to evaluate.</param>

@@ -141,7 +141,7 @@ public class Clock
 	private void UpdateUnits()
 	{
 		hours = ellapsedTime >= 3600.0f ? Mathf.Floor(ellapsedTime * INVERSE_HOURS) : 0.0f;
-		minutes = ellapsedTime >= 60.0f ? Mathf.Floor(ellapsedTime * INVERSE_MINUTES) % 60.0f : 0.0f;
+		minutes = ellapsedTime >= 60.0f ? (format | TimeFormat.Hours) == format ? Mathf.Floor(ellapsedTime * INVERSE_MINUTES) % 60.0f : Mathf.Floor(ellapsedTime * INVERSE_MINUTES) : 0.0f;
 		seconds = ellapsedTime % 60.0f;
 
 		float flooredSeconds = Mathf.Floor(seconds);
@@ -167,18 +167,18 @@ public class Clock
 		}
 		if(includesMinutes)
 		{
-			if(includesHours) builder.Append(" : ");
+			if(includesHours) builder.Append(":");
 			builder.Append(minutes.ToString("00"));
 		}
 		if(includesSeconds)
 		{
-			if(includesHours || includesMinutes) builder.Append(" : ");
+			if(includesHours || includesMinutes) builder.Append(":");
 			builder.Append(seconds.ToString("00"));
 		}
 
 		if(secondsFractioning != SecondsFractioning.None)
 		{
-			if(includesHours || includesMinutes || includesSeconds) builder.Append(" : ");
+			if(includesHours || includesMinutes || includesSeconds) builder.Append(":");
 
 			switch(secondsFractioning)
 			{

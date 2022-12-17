@@ -46,6 +46,9 @@ public class Cooldown
 
 	/// <summary>Gets onCooldown property.</summary>
 	public bool onCooldown { get { return coroutine != null; } }
+
+	/// <summary>Gets active property.</summary>
+	public bool active { get { return coroutine != null; } }
 #endregion
 
 	/// <summary>Cooldown constructor.</summary>
@@ -72,8 +75,21 @@ public class Cooldown
 	/// <param name="actions">Set of actions to add to this UnityEvent.</param>
 	public Cooldown(MonoBehaviour _monoBehaviour, float _duration, params UnityAction[] actions) : this(_monoBehaviour, _duration)
 	{
-		if(actions != null)
-		foreach(UnityAction action in actions)
+		if(actions != null) foreach(UnityAction action in actions)
+		{
+			OnCooldownEnds.AddListener(action);
+		}
+	}
+
+	/// <summary>Initializes Cooldown.</summary>
+	/// <param name="_monoBehaviour">MonoBehaviour's Reference.</param>
+	/// <param name="actions">Set of actions to add to this UnityEvent.</param>
+	public void Initialize(MonoBehaviour _monoBehaviour, params UnityAction[] actions)
+	{
+		monoBehaviour = _monoBehaviour;
+		OnCooldownEnds = new UnityEvent();
+		
+		if(actions != null) foreach(UnityAction action in actions)
 		{
 			OnCooldownEnds.AddListener(action);
 		}
