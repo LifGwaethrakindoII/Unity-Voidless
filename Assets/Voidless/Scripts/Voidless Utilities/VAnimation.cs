@@ -7,6 +7,14 @@ namespace Voidless
 {
 public static class VAnimation
 {
+	public static readonly int HASH_ANIMATION_EMPTY; 	/// <summary>Empty Animation's Hash.</summary>
+
+	/// <summary>VAnimation's static constructor.</summary>
+	static VAnimation()
+	{
+		HASH_ANIMATION_EMPTY = Animator.StringToHash("Empty");
+	}
+
 	/// <summary>Adds AnimationClips into Animation Component.</summary>
 	/// <param name="_animation">Animation's Component.</param>
 	/// <param name="_clips">AnimationClips to add.</param>

@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Resident Evil Maker/Scenes - RE Maker/Scene_TestRoom.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Transition.unity
+    path: Assets/Resident Evil Maker/Scenes - RE Maker/Transition.unity
     guid: 57694a7b0650f3b4d986fde4f6b59f3d
   - enabled: 1
-    path: Assets/Scenes/SaveRoom.unity
+    path: Assets/Resident Evil Maker/Scenes - RE Maker/SaveRoom.unity
     guid: 44a69376745347f4897b0262aaf52373
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d029301919a30124abbce37230599350,

@@ -4,6 +4,11 @@ namespace Voidless
 {
 public static class VColor
 {
+	public const float WEIGHT_DISTANCE_RED = 0.3f;
+	public const float WEIGHT_DISTANCE_GREEN = 0.59f;
+	public const float WEIGHT_DISTANCE_BLUE = 0.11f;
+	public const float MAX_COLOR_SQUAREDISTANCE = 9.0f; // (3.0f + 4.0f + 2.0f) from Euclidean Distance weights
+
 	/// <summary>Sets Color Alpha.</summary>
 	/// <param name="_color">The Color that will have its Alpha modified.</param>
 	/// <param name="_alpha">Updated Color Alpha Component.</param>
@@ -159,6 +164,56 @@ public static class VColor
 		t = Mathf.Clamp(t, 0.0f, 1.0f);
 
 		return Color.Lerp(Color.Lerp(a, c, t), Color.Lerp(c, b, t), t);
+	}
+
+	/// <summary>Calculates the average value of provided Color.</summary>
+	/// <param name="_color">Color to extract average from.</param>
+	/// <param name="_includeAlpha">Include Alpha in the average? false by default.</param>
+	/// <returns>Average value of provided color.</returns>
+	public static float Average(this Color _color, bool _includeAlpha = false)
+	{
+		float sum = _color.r + _color.g + _color.g;
+		float n = 3.0f;
+
+		if(_includeAlpha)
+		{
+			sum += _color.a;
+			n++;
+		} 
+
+		return sum / n;
+	}
+
+	/// <summary>Calculates the Euclidean square distance between 2 colors.</summary>
+	/// <param name="a">Color A.</param>
+	/// <param name="b">Color B.</param>
+	/// <returns>Euclidean square Distance between 2 colors.</returns>
+	public static float SquareDistance(Color a, Color b)
+	{
+		float dr = (a.r - b.r);
+		float dg = (a.g - b.g);
+		float db = (a.b - b.b);
+		float R = (a.r + b.r) * 0.5f;
+
+		dr *= dr;
+		dg *= dg;
+		db *= db;
+
+		return R < 128.0f ? (2.0f * dr) + (4.0f * dg) + (3.0f * db) : (3.0f * dr) + (4.0f * dg) + (2.0f * db);
+	}
+
+	/// <summary>Calculates the Euclidean distance between 2 colors.</summary>
+	/// <param name="a">Color A.</param>
+	/// <param name="b">Color B.</param>
+	/// <returns>Euclidean Distance between 2 colors.</returns>
+	public static float Distance(Color a, Color b)
+	{
+		return Mathf.Sqrt(SquareDistance(a, b));
+	}
+
+	public static float GetNormalizedValue(this Color a)
+	{
+		return SquareDistance(a, Color.black) /  MAX_COLOR_SQUAREDISTANCE;
 	}
 }
 }

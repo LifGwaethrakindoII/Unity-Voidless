@@ -189,6 +189,7 @@ public class SerializableDictionary<K, V> : Dictionary<K, V>, ISerializationCall
 // Float Key Dictionaries:
 [Serializable] public class FloatStringDictionary : SerializableDictionary<float, string> { /*...*/ }
 [Serializable] public class FloatIntDictionary : SerializableDictionary<float, int> { /*...*/ }
+[Serializable] public class FloatColorDictionary : SerializableDictionary<float, Color> { /*...*/ }
 
 // GameObjectTag Key Dictionaries:
 [Serializable] public class TagIndexDictionary : SerializableDictionary<GameObjectTag, CollectionIndex> { /*...*/ }

@@ -369,7 +369,7 @@ public static class VGizmos
 			Gizmos.DrawLine(initialPoint, finalPoint);
 		}
 #endif
-        }
+    }
 
 	/// <summary>Draws a Cubic Beizer Curve Line between an initial point, a tangent and a final point on the scene.</summary>
 	/// <param name="_initial">Curve's initial point [P0].</param>

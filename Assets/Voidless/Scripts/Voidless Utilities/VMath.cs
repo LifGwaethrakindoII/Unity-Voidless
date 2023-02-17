@@ -6,6 +6,19 @@ using UnityEngine;
 
 /// Easings: https://easings.net/#
 
+/*============================================================
+**
+** Class:  VMath
+**
+** Purpose: A library full of all-math-related functions. Not
+** only for numbers, also for Vectors, Matrices, Quaternions,
+** etc.
+**
+**
+** Author: Lîf Gwaethrakindo
+**
+==============================================================*/
+
 namespace Voidless
 {
 [Flags]
@@ -28,6 +41,12 @@ public enum CoordinatesModes 															/// <summary>Coordinates Modes.</sum
 	ZY, 																				/// <summary>Z and Y Coordinate Mode.</summary>
 	YZ, 																				/// <summary>Y and Z Coordinate Mode.</summary>
 	ZX 																					/// <summary>Z and X Coordinate Mode.</summary>
+}
+
+public enum SpeedChange
+{
+    Acceleration,
+    Linear
 }
 
 /// <summary>Normalized Property parametric function.</summary>
@@ -269,6 +288,9 @@ public static class VMath
 
 #endregion
 
+/*---------------
+| Easings: 		|
+---------------*/
 #region Easings:
 	/// <returns>Ease-In Sine for Normalized Time t.</returns>
 	public static float EaseInSine(float t)
@@ -297,6 +319,18 @@ public static class VMath
 		return c3 * t * t * t - c1 * t * t;
 	}
 
+	/// <returns>Ease-Out Sine for Normalized Time t.</returns>
+	public static float EaseOutSine(float t)
+	{
+		return Mathf.Sin(t * Mathf.PI * 0.5f);
+	}
+
+	/// <summary>Ease-Out Cubic for Normalized Time t.</summary>
+	public static float EaseOutCubic(float t)
+	{
+		return 1.0f - Mathf.Pow(1.0f - t, 3.0f);
+	}
+
 	/// <returns>Ease-Out Bounce for Normalized Time t.</returns>
 	public static float EaseOutBounce(float t)
 	{
@@ -309,6 +343,9 @@ public static class VMath
 		else 						return n1 * (t -= 2.625f / d1) * t + 0.984375f;
 	}
 #endregion
+
+	/// <summary>Turns value into boolean representation [if above 0, it is considered true].</summary>
+	public static bool ToBoolean(int x) { return x > 0; }
 
 #region NormalizedPropertyFunctionOCs:
 	/*public static float Interpolate(float a, float b, float t)
@@ -516,6 +553,54 @@ public static class VMath
 		return _t;
 	}
 #endregion
+
+	/// <summary>Controlled Random function [you pass the seed].</summary>
+	/// <param name="min">Min Random Value.</param>
+	/// <param name="max">Max Random Value.</param>
+	/// <param name="seed">Custom seed [it does not change with time].</param>
+	public static float Rand(float min, float max, float seed)
+	{
+		return min + (seed % (max - min));
+	}
+
+	/// <summary>Linear Congruential Generator Random [you pass the seed and the previous state].</summary>
+	/// <param name="min">Min Random Value.</param>
+	/// <param name="max">Max Random Value.</param>
+	/// <param name="seed">Custom seed [it does not change with time].</param>
+	/// <param name="state">Previous Random value.</param>
+	public static float Rand(float min, float max, float seed, ref float state)
+	{
+		/*
+		x[t+1] = (a * x[t] + b) % m
+
+		where:
+
+			- x[t]: Previous state
+			- a and b: Amplitude values
+			- m: Output reduction
+		*/
+		return state = min + ((state + seed) % (max - min));
+	}
+
+	/// <summary>PID [Proportional-Integral-Derivative] Loop Function.</summary>
+	/// <param name="x">Current Value.</param>
+	/// <param name="y">Target Value.</param>
+	/// <param name="i">Integral's reference.</param>
+	/// <param name="e">Error's reference.</param>
+	/// <param name="pF">Proportional's Factor.</param>
+	/// <param name="iF">Integral's Factor.</param>
+	/// <param name="dF">Derivative's Factor.</param>
+	/// <param name="t">Time frame.</param>
+	/// <returns>Value through a PID loop.</returns>
+	public static float PID(float x, float y, ref float i, ref float e, float pF, float iF, float dF, float t)
+	{
+		float d = y - x;
+		i += d * t;
+		float dx = (d - e) / t;
+		e = d;
+
+		return d * pF + i * iF + dx * dF;
+	}
 
 #region TrigonometricFunctions:
 	/// https://stackoverflow.com/questions/38917692/sin-cos-funcs-without-math-h
@@ -1021,6 +1106,68 @@ public static class VMath
 	/// \TODO Do the rest of the Steering Functions...
 #endregion
 
+	/// <summary>Accelerates x value into y value.</summary>
+    /// <param name="x">Value to accelerate.</param>
+    /// <param name="y">Target value.</param>
+    /// <param name="v">Velocity's reference.</param>
+    /// <param name="a">Acceleration rate (x / s^2).</param>
+    /// <param name="dt">Time's Delta.</param>
+    /// <param name="m">Speed Change's Mode. Acceleration by default.</param>
+    /// <param name="e">Epsilon's tolerance.</param>
+    public static float AccelerateTowards(float x, float y, ref float v, float a, float dt, SpeedChange m = SpeedChange.Acceleration, float e = EPSILON)
+    {
+        /*Where:
+        - d = Delta or error margin between the target and current value
+        - s = Sign of the desired direction
+        - p = Projection of the current value with the new velocity value (for overlapping evaluation)*/
+
+        float d = y - x;
+
+        if(Mathf.Abs(d) <= e)
+        {
+            v = 0.0f;
+            x = y;
+            return x;
+        }
+
+        float s = Mathf.Sign(d);
+
+        /*Reset the velocity if the direction is different than the velocity's.
+        I do this reset in case the previous accumulated velocity is too much,
+        which would make the velocity to take a while before pointing towards
+        the same direction.*/
+        if(Mathf.Sign(v) != s) v = 0.0f;
+
+        switch(m)
+        {
+            // Accumulate velocity as the acceleration keeps happening (x / s^2)
+            case SpeedChange.Acceleration:
+                v += (s * a * dt * dt);
+            break;
+
+            // Apply linear acceleration (x / s)
+            case SpeedChange.Linear:
+                v = s * a * dt;
+            break;
+        }
+        
+        float p = x + v;
+
+        /* If the projection would overlap the target value
+        (being more or less than the target depending of) the direction,
+        add delta instead of the velocity (setting x equal to y is also valid)*/
+        if(s == 1.0f ? p > y : p < y)
+        {
+            v = 0.0f;
+            x += d;
+        }
+        else x += v;
+
+        /* Maybe clamping shouldn't be necessary if the overlapping operations are correct.
+        Paranoia from my part?*/
+        return s == 1.0f ? Mathf.Min(x, y) : Mathf.Max(x, y);
+    }
+
 #region Ray2DOperations:
 	/// <summary>Calculates a 2X2 determinant, given two bidimensional Rays.</summary>
 	/// <param name="a">Ray A.</param>
@@ -1060,6 +1207,15 @@ public static class VMath
 #endregion
 
 #region RandomOperations:
+	/// <summary>Controlled Random function [you pass the seed].</summary>
+	/// <param name="min">Min Random Value.</param>
+	/// <param name="max">Max Random Value.</param>
+	/// <param name="seed">Custom seed [it does not change with time].</param>
+	public static int Rand(int min, int max, int seed)
+	{
+		return min + (seed % (max - min));
+	}
+	
 	/// <summary>Gets a unique [not duplicate] set of random integers.</summary>
 	/// <param name="_range">Random's Range [max gets excluded].</param>
 	/// <param name="_count">Size of the set.</param>
