@@ -3,8 +3,10 @@
 /// \TODO Add 'On' Prefix into Interface's Callbacks. For more readability.
 public interface IFiniteStateMachine<T>
 {
-	T state { get; set; } 			/// <summary>Current state.</summary>
-	T previousState { get; set; } 	/// <summary>Previous State.</summary>
+	/// <summary>Current state.</summary>
+	T state { get; set; }
+	/// <summary>Previous State.</summary>
+	T previousState { get; set; }
 
 	/// <summary>Enters T State.</summary>
 	/// <param name="_state">T State that will be entered.</param>

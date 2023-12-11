@@ -10,21 +10,23 @@ public delegate void OnPoolObjectDeactivation(IPoolObject _poolObject);
 
 public interface IPoolObject
 {
-	event OnPoolObjectDeactivation onPoolObjectDeactivation; 	/// <summary>Event invoked when this Pool Object is being deactivated.</summary>
+	event OnPoolObjectDeactivation onPoolObjectDeactivation;
 
-	bool dontDestroyOnLoad { get; set; } 						/// <summary>Is this Pool Object going to be destroyed when changing scene? [By default it destroys it].</summary>
-	bool active { get; set; } 									/// <summary>Is this Pool Object active [preferibaly unavailable to recycle]?.</summary>
+	/// <summary>Is this Pool Object going to be destroyed when changing scene? [By default it destroys it].</summary>
+	bool dontDestroyOnLoad { get; set; }
+	/// <summary>Is this Pool Object active [preferibaly unavailable to recycle]?.</summary>
+	bool active { get; set; }
 
-	/// <summary>Independent Actions made when this Pool Object is being created.</summary>
+	/// <summary>Callback invoked when this Pool Object is being created.</summary>
 	void OnObjectCreation();
 
-	/// <summary>Actions made when this Pool Object is being reseted.</summary>
+	/// <summary>Callback invoked when this Pool Object is being reseted.</summary>
 	void OnObjectReset();
 
 	/// <summary>Callback invoked when the object is deactivated.</summary>
 	void OnObjectDeactivation();
 
-	/// <summary>Actions made when this Pool Object is being destroyed.</summary>
+	/// <summary>Callback invoked when this Pool Object is being destroyed.</summary>
 	void OnObjectDestruction();
 }
 }

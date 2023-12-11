@@ -395,6 +395,95 @@ MonoBehaviour:
   child: {fileID: 720927677}
   speed: 3
   magnitude: 0.5
+--- !u!1001 &317781139
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1139212583}
+    m_Modifications:
+    - target: {fileID: -8981853760064417390, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bb57c757e9093247ab4131c8bb9ace6, type: 2}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_Name
+      value: Gun_LowPoly_Revolver_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885916229996221088, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bb57c757e9093247ab4131c8bb9ace6, type: 2}
+    - target: {fileID: 6697978107037645793, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bb57c757e9093247ab4131c8bb9ace6, type: 2}
+    - target: {fileID: 8546909615691067115, guid: fee2fd80b1c7e85488d56800f93e249a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bb57c757e9093247ab4131c8bb9ace6, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fee2fd80b1c7e85488d56800f93e249a, type: 3}
 --- !u!1 &377991911
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +950,7 @@ Transform:
   - {fileID: 377991913}
   - {fileID: 1142617585}
   - {fileID: 944938081}
+  - {fileID: 1491567510}
   m_Father: {fileID: 930063016}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -880,7 +970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1142617585
 Transform:
   m_ObjectHideFlags: 0
@@ -1105,6 +1195,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25fcfbd3db128fb4e990574ef1780574, type: 3}
+--- !u!4 &1491567510 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fee2fd80b1c7e85488d56800f93e249a,
+    type: 3}
+  m_PrefabInstance: {fileID: 317781139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1641965548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1238,7 @@ Camera:
   m_GameObject: {fileID: 1641965548}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1183,8 +1279,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641965548}
-  m_LocalRotation: {x: -0.09822257, y: 0.8929293, z: -0.23713024, w: -0.3698634}
-  m_LocalPosition: {x: 4.9497476, y: 5.75, z: 4.9497476}
+  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: -0.38268346}
+  m_LocalPosition: {x: 6.0104074, y: 2.75, z: 6.0104074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1204,13 +1300,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ditherShader: {fileID: 4800000, guid: 24c3ddac0291303448b94365e62c4aea, type: 3}
-  spread: 0.01
+  spread: 0.1
   redColorCount: 10
   greenColorCount: 10
   blueColorCount: 10
   bayerLevel: 0
-  downSamples: 2
-  pointFilterDown: 1
+  downSamples: 1
+  pointFilterDown: 0
 --- !u!114 &1641965553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1578,7 +1674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 47bb910dd3521ea42b57fc1d6c34de42, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 47bb910dd3521ea42b57fc1d6c34de42, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1778,10 +1874,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotate: 1
   cameraShot: 2
-  target: {fileID: 1142617585}
+  target: {fileID: 1491567510}
   pointOfInterest: {x: 0, y: 0, z: 0}
-  distance: 7
-  height: 4
+  distance: 8.5
+  height: 0
   rotationSpeed: 65
   rotations: 2
   frameRate: 15

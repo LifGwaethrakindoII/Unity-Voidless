@@ -183,6 +183,26 @@ public static class VEditorGUILayout
 		_dictionary.valuesList = values;
 	}
 
+	public static SerializableDictionary<K, V> DictionaryField<K, V>(SerializedProperty _dictionary)
+	{
+		SerializedProperty keysList = _dictionary.FindPropertyRelative("_keysList");
+		SerializedProperty valuesList = _dictionary.FindPropertyRelative("_valuesList");
+		
+		if(keysList == null || valuesList == null) return null;
+
+		int count = Mathf.Min(keysList.arraySize, valuesList.arraySize);
+
+		SerializableDictionary<K, V> dictionary = new SerializableDictionary<K, V>();
+
+		do
+		{
+			Debug.Log("[VEditorGUILayout] Property's Name: " + keysList.name);	
+		}
+		while(keysList.NextVisible(true));
+
+		return dictionary;
+	}
+
 #region ListFields:
 	/// <summary>Serializes List of class inheriting from UnityEngine.Object on the Inspector's GUI.</summary>
 	/// <param name="_label">Label of the foldout.</param>

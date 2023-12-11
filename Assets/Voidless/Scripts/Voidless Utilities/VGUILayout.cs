@@ -55,5 +55,10 @@ public static class VGUILayout
 				return float.TryParse(valueText, out x) ? x : _value;
 		}
 	}
+
+	public static SerializableDictionary<K, V> DictionaryField<K, V>(SerializableDictionary<K, V> _dictionary)
+	{
+		return null;
+	} 
 }
 }
