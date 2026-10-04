@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if ODIN_INSPECTOR	
 using Sirenix.OdinInspector;
+#endif
 
 namespace Voidless
 {
@@ -58,7 +60,9 @@ namespace Voidless
 			}
 		}
 
+#if ODIN_INSPECTOR	
 		[Button("Play")]
+#endif
 		/// <summary>Plays target animation.</summary>
 		/// <param name="_animation">Animation's Name in the AnimatorController.</param>
 		/// <param name="_layer">Animation's layer [0 by default].</param>
@@ -67,7 +71,9 @@ namespace Voidless
 			animator.Play(_animation, _layer);
 		}
 
+#if ODIN_INSPECTOR	
 		[Button("Cross-Fade")]
+#endif
 		/// <summary>Cross-Fades to target animation.</summary>
 		/// <param name="_animation">Animation's Name in the AnimatorController.</param>
 		/// <param name="_fadeDuration">Normalized Fade's duration.</param>

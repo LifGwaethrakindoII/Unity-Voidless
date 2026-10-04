@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+#endif
 
 using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
@@ -68,29 +70,80 @@ namespace Voidless.NewInputSystem
 
         [Space(5f)]
         [Header("D-Pad's Axes:")]
-        [TabGroup("Main", "Axes")][SerializeField] private InputActionReference _dPadLeftInputReference;
-        [TabGroup("Main", "Axes")][SerializeField] private InputActionReference _dPadRightInputReference;
-        [TabGroup("Main", "Axes")][SerializeField] private InputActionReference _dPadDownInputReference;
-        [TabGroup("Main", "Axes")][SerializeField] private InputActionReference _dPadUpInputReference;
-        [TabGroup("Main", "Axes")][SerializeField] private InputActionReference _leftStickClickInputReference;
-        [TabGroup("Main", "Axes")][SerializeField] private InputActionReference _rightStickClickInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("Main", "Axes")]
+#endif
+        [SerializeField] private InputActionReference _dPadLeftInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("Main", "Axes")]
+#endif
+        [SerializeField] private InputActionReference _dPadRightInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("Main", "Axes")]
+#endif
+        [SerializeField] private InputActionReference _dPadDownInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("Main", "Axes")]
+#endif
+        [SerializeField] private InputActionReference _dPadUpInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("Main", "Axes")]
+#endif
+        [SerializeField] private InputActionReference _leftStickClickInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("Main", "Axes")]
+#endif
+        [SerializeField] private InputActionReference _rightStickClickInputReference;
         [Space(5f)]
         [Header("Actions:")]
-        [TabGroup("GamePad", "Actions")][SerializeField] private InputActionReference _leftActionInputReference;
-        [TabGroup("GamePad", "Actions")][SerializeField] private InputActionReference _rightActionInputReference;
-        [TabGroup("GamePad", "Actions")][SerializeField] private InputActionReference _downActionInputReference;
-        [TabGroup("GamePad", "Actions")][SerializeField] private InputActionReference _upActionInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Actions")]
+#endif
+        [SerializeField] private InputActionReference _leftActionInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Actions")]
+#endif
+        [SerializeField] private InputActionReference _rightActionInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Actions")]
+#endif
+        [SerializeField] private InputActionReference _downActionInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Actions")]
+#endif
+        [SerializeField] private InputActionReference _upActionInputReference;
         [Space(5f)]
         [Header("Shoulders:")]
-        [TabGroup("GamePad", "Shoulders")][SerializeField] private InputActionReference _leftShoulder1InputReference;
-        [TabGroup("GamePad", "Shoulders")][SerializeField] private InputActionReference _leftShoulder2InputReference;
-        [TabGroup("GamePad", "Shoulders")][SerializeField] private InputActionReference _rightShoulder1InputReference;
-        [TabGroup("GamePad", "Shoulders")][SerializeField] private InputActionReference _rightShoulder2InputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Shoulders")]
+#endif
+        [SerializeField] private InputActionReference _leftShoulder1InputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Shoulders")]
+#endif
+        [SerializeField] private InputActionReference _leftShoulder2InputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Shoulders")]
+#endif
+        [SerializeField] private InputActionReference _rightShoulder1InputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Shoulders")]
+#endif
+        [SerializeField] private InputActionReference _rightShoulder2InputReference;
         [Space(5f)]
         [Header("Center Buttons:")]
-        [TabGroup("GamePad", "Center Buttons")][SerializeField] private InputActionReference _leftCenterInputReference;
-        [TabGroup("GamePad", "Center Buttons")][SerializeField] private InputActionReference _rightCenterInputReference;
-        [TabGroup("GamePad", "Center Buttons")][SerializeField] private InputActionReference _mainCenterInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Center Buttons")]
+#endif
+        [SerializeField] private InputActionReference _leftCenterInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Center Buttons")]
+#endif
+        [SerializeField] private InputActionReference _rightCenterInputReference;
+#if ODIN_INSPECTOR
+        [TabGroup("GamePad", "Center Buttons")]
+#endif
+        [SerializeField] private InputActionReference _mainCenterInputReference;
         private Vector2 _dPadAxes;
         private Vector2 _previousDPadAxes;
         private float _dPadAxesMagnitude;

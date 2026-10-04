@@ -4,7 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+#if ODIN_INSPECTOR	
 using Sirenix.OdinInspector;
+#endif
 
 namespace Voidless.NewInputSystem
 {
@@ -15,26 +17,74 @@ public class BaseInputController : MonoBehaviour
 	[InfoBox("@ToString()")]
 	[Space(5f)]
 	[Header("Axes' Input Actions:")]
-	[TabGroup("Main", "Axes")][SerializeField] private InputActionReference _leftAxisXInputReference;
-	[TabGroup("Main", "Axes")][SerializeField] private InputActionReference _leftAxisYInputReference;
-	[TabGroup("Main", "Axes")][SerializeField] private InputActionReference _rightAxisXInputReference;
-	[TabGroup("Main", "Axes")][SerializeField] private InputActionReference _rightAxisYInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("Main", "Axes")]
+#endif
+	[SerializeField] private InputActionReference _leftAxisXInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("Main", "Axes")]
+#endif
+	[SerializeField] private InputActionReference _leftAxisYInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("Main", "Axes")]
+#endif
+	[SerializeField] private InputActionReference _rightAxisXInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("Main", "Axes")]
+#endif
+	[SerializeField] private InputActionReference _rightAxisYInputReference;
 	[Space(5f)]
 	[Header("Axes' Settings:")]
-	[TabGroup("GamePad", "Axes")][Range(0.0f, 0.9f)][SerializeField] private float _leftDeadZoneRadius;
-	[TabGroup("GamePad", "Axes")][Range(0.0f, 0.9f)][SerializeField] private float _rightDeadZoneRadius;
+#if ODIN_INSPECTOR	
+	[TabGroup("GamePad", "Axes")][Range(0.0f, 0.9f)]
+#endif
+	[SerializeField] private float _leftDeadZoneRadius;
+#if ODIN_INSPECTOR	
+	[TabGroup("GamePad", "Axes")][Range(0.0f, 0.9f)]
+#endif
+	[SerializeField] private float _rightDeadZoneRadius;
 	[Space(5f)]
 	[Header("UI Input Actions:")]
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UIPointInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UILeftClickInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UIMiddleClickInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UIRightClickInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UIScrollWheelInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UIMoveInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UISubmitInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UICancelInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UITrackedPositionInputReference;
-	[TabGroup("UI", "UI")][SerializeField] private InputActionReference _UITrackedOrientationInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UIPointInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UILeftClickInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UIMiddleClickInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UIRightClickInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UIScrollWheelInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UIMoveInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UISubmitInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UICancelInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UITrackedPositionInputReference;
+#if ODIN_INSPECTOR	
+	[TabGroup("UI", "UI")]
+#endif
+	[SerializeField] private InputActionReference _UITrackedOrientationInputReference;
 	private Vector2 _leftAxes;
 	private Vector2 _rightAxes;
 	private Vector2 _previousLeftAxes;

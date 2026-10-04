@@ -4,7 +4,9 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if ODIN_INSPECTOR	
 //using Sirenix.OdinInspector;
+#endif
 
 /*===========================================================================
 **
@@ -39,7 +41,9 @@ namespace LGG
 	[Serializable]
 	public abstract class BaseObjectPool<T> : IObjectPool<T>, IEnumerable<T> where T : class, IPoolObject
 	{
+#if ODIN_INSPECTOR	
 		//[InfoBox("@ToString()")]
+#endif
 		[SerializeField] private T _referenceObject;
 		[SerializeField] private int _limit = 1000;
 		[SerializeField] private LimitHandling _limitHandling;
