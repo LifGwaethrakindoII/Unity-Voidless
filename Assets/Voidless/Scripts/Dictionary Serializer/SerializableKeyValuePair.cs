@@ -8,8 +8,8 @@ namespace Voidless
 [System.Serializable]
 public class SerializableKeyValuePair<T, U>
 {
-	[SerializeField] private T _key; 	/// <summary>SerializableKeyValuePair's ID.</summary>
-	[SerializeField] private U _value; 	/// <summary>SerializableKeyValuePair's Value.</summary>
+	[SerializeField] private T _key;
+	[SerializeField] private U _value;
 
 	/// <summary>Gets and Sets key property.</summary>
 	public T key

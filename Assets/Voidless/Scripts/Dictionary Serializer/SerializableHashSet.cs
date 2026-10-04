@@ -1,9 +1,10 @@
 using System;
+using System.Linq;
 using System.Text;
-using System.Runtime.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.Serialization;
 
 namespace Voidless
 {
@@ -13,64 +14,83 @@ public class SerializableHashSet<T> : HashSet<T>, ISerializationCallbackReceiver
         , ISerializable
 #endif
 {
-    [SerializeField, HideInInspector] public List<T> _items;
+    [SerializeField, HideInInspector] public List<T> _list;
 
-    /// <summary>Gets and Sets items property.</summary>
-    public List<T> items
+    /// <summary>Gets and Sets list property.</summary>
+    public List<T> list
     {
-        get { return _items; }
-        set { _items = value; }
+        get
+        {
+            if (_list == null) _list = new List<T>();
+            return _list;
+        }
+        set { _list = value; }
     }
 
-    /// <summary>SerializableHashSet default constructor.</summary>
+    /// <summary>SerializableHashSet's constructor.</summary>
     public SerializableHashSet() : base()
     {
-        items = new List<T>();
+        list = new List<T>();
     }
 
 #if UNITY_EDITOR
-    /// <summary>SerializableHashSet default constructor.</summary>
+    /// <summary>Constructor for Editor mode.</summary>
     public SerializableHashSet(SerializationInfo _information, StreamingContext _context) : base(_information, _context)
     {
-        items = new List<T>();
+        list = new List<T>();
     }
 #endif
 
     /// <summary>Implement this method to receive a callback before Unity serializes your object.</summary>
-    /// <summary>Saves Dictionary to both Lists.</summary>
+    /// <summary>Saves HashSet to List.</summary>
     public void OnBeforeSerialize()
     {
-        items.Clear();
+        if (list == null) list = new List<T>();
 
-        foreach(T item in this)
+        HashSet<T> copies = new HashSet<T>(list);
+
+        foreach (T item in this)
         {
-            items.Add(item);
+            if (!copies.Contains(item))
+            {
+                list.Add(item);
+            }
         }
     }
 
     /// <summary>Implement this method to receive a callback after Unity deserializes your object.</summary>
     public void OnAfterDeserialize()
     {
-        Clear();
-
-        for(int i = 0; i < items.Count; i++)
+        if (list != null)
         {
-            Add(items[i]);
+            this.Clear();
+
+            foreach (T item in list)
+            {
+                this.Add(item);
+            }
         }
     }
 
-    /// <summary>Clears internal HashSet and Items' List.</summary>
+    /// <summary>Clears internal HashSet and List.</summary>
     public void ClearAll()
     {
-        Clear();
-        items.Clear();
+        if (this != null)
+        {
+            Clear();
+        }
+
+        if (list != null)
+        {
+            list.Clear();
+        }
     }
 
 #if UNITY_EDITOR
     /// <summary>Populates a SerializationInfo with the data needed to serialize the target object.</summary>
     public override void GetObjectData(SerializationInfo _info, StreamingContext _context)
     {
-        foreach(T item in this)
+        foreach (T item in this)
         {
             _info.AddValue(item.GetHashCode().ToString(), item);
         }
@@ -85,10 +105,11 @@ public class SerializableHashSet<T> : HashSet<T>, ISerializationCallbackReceiver
         builder.Append("HashSet: ");
         builder.Append("\n{");
         builder.Append("\n");
-        foreach(T item in this)
+        foreach (T item in this)
         {
-            builder.Append("\t");
+            builder.Append("\t[ ");
             builder.Append(item.ToString());
+            builder.Append(" ]");
             builder.Append("\n");
         }
         builder.Append("}");
@@ -97,7 +118,7 @@ public class SerializableHashSet<T> : HashSet<T>, ISerializationCallbackReceiver
     }
 }
 
+[Serializable] public class PoolGameObjectHashSet : SerializableHashSet<PoolGameObject> { /*...*/ }
+[Serializable] public class VCameraTargetHashSet : SerializableHashSet<VCameraTarget> { /*...*/ }
 [Serializable] public class StringHashSet : SerializableHashSet<string> { /*...*/ }
-[Serializable] public class IntHashSet : SerializableHashSet<int> { /*...*/ }
-[Serializable] public class FloatHashSet : SerializableHashSet<float> { /*...*/ }
 }
