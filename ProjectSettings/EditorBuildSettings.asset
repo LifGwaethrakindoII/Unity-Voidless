@@ -15,6 +15,10 @@ EditorBuildSettings:
     path: Assets/Resident Evil Maker/Scenes - RE Maker/SaveRoom.unity
     guid: 44a69376745347f4897b0262aaf52373
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 7060a770f185f4542baf7a39c3b6996c,
+      type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: 9164affaf44cf704096ec14663b18ccc,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: d029301919a30124abbce37230599350,
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 66efcd4059207b240b72f156c408255a,
