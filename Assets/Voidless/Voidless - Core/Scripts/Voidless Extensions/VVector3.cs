@@ -884,7 +884,10 @@ namespace Voidless
         /// <summary>Gets percentage of distance covered by one vector projected onto another.</summary>
         /// <param name="projectedVector">The vector to be projected, lhs of dot product.</param>
         /// <param name="baseVector">The base vector to be projected onto, rhs of dot product.</param>
-        public static float GetScalarProjectionProgress(Vector3 projectedVector, Vector3 baseVector) => Vector3.Dot(projectedVector / baseVector.magnitude, baseVector / baseVector.magnitude);
+        public static float GetScalarProjectionProgress(Vector3 projectedVector, Vector3 baseVector)
+		{
+			return Vector3.Dot(projectedVector / baseVector.magnitude, baseVector / baseVector.magnitude);
+		}
 
         public static Vector3 XOR(Vector3 a, Vector3 b)
         {

@@ -33,10 +33,19 @@ namespace Voidless
 			}
 
 			string debugStr = " [ComponentDebug]\n";
-			for ( int i = 0; i < componentsList.Length; i++ ) {
+			for ( int i = 0; i < componentsList.Length; i++ )
+			{
 				var x = componentsList[i];
+				
 				if ( x != null )
-					debugStr += string.Concat(" -- Component:", x.GetType().Name, " on object ", x.name, "<-", x.transform.parent?.name, "<-", x.transform.parent?.parent?.name, "enabled: ", x.isActiveAndEnabled, "\n");
+				{
+					Transform parent = x.transform.parent;
+					Transform grandParent = parent != null ? parent.parent : null;
+					string parentName = parent != null ? parent.name : "NO_PARENT";
+					string grandparentName = grandParent != null ? grandParent.name : "NO_GRANDPARENT";
+
+					debugStr += string.Concat(" -- Component:", x.GetType().Name, " on object ", x.name, "<-", parentName, "<-", grandparentName, "enabled: ", x.isActiveAndEnabled, "\n");
+				}
 				else
 					debugStr += string.Concat("COMPONENT AT INDEX ", i, " IS SUDDENLY NULL!\n");
 

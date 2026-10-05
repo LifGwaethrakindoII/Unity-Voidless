@@ -73,7 +73,7 @@ namespace Voidless
 			if(_rotation == default(Quaternion)) _rotation = Quaternion.identity;
 
 			recycledObject.transform.SetPositionAndRotation( _position , _rotation );
-			onBeforeInvokingRecycleCallback?.Invoke( recycledObject );
+			if(onBeforeInvokingRecycleCallback != null) onBeforeInvokingRecycleCallback.Invoke(recycledObject);
 			recycledObject.OnObjectRecycled();
 
 			return recycledObject;

@@ -292,7 +292,7 @@ namespace Voidless
 		| Easings: 		|
 		---------------*/
 		#region Easings:
-		public static float F(float t) => t;
+		public static float F(float t) { return t; }
 
 		/// <returns>Ease-In Sine for Normalized Time t.</returns>
 		public static float EaseInSine(float t)

@@ -38,7 +38,7 @@ namespace Voidless.AI.PathFinding
             set { _depth = value; }
         }
 
-        public override int Count => nodesGrid != null ? nodesGrid.Length : 0;
+        public override int Count  { get { return nodesGrid != null ? nodesGrid.Length : 0; } }
 
         /// <summary>Gets and Sets nodesGrid property.</summary>
         public IPFNode<Vector3>[,,] nodesGrid

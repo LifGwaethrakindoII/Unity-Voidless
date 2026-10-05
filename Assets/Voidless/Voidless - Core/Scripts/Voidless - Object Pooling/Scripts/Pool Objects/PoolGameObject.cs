@@ -90,7 +90,7 @@ namespace Voidless
 		/// <param name="_event">Event to invoke.</param>
 		public void InvokeEvent(PoolObjectEvent _event)
 		{
-			onPoolObjectEvent?.Invoke( this , _event );
+			if(onPoolObjectEvent != null) onPoolObjectEvent.Invoke(this, _event);
 		}
 #endregion
 	}
