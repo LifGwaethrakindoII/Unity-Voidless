@@ -123,8 +123,15 @@ public class VAnimatorController : MonoBehaviour
 		if(IsActive(_hash, _layer)) return false;
 
 		SetActive(_hash, _layer);
-		animator.CrossFade(_hash, _fadeDuration, _layer, _offset, _transitionTime);
-		return true;
+
+#if UNITY_2018_1_OR_NEWER
+    	animator.CrossFade(_hash, _fadeDuration, _layer, _offset, _transitionTime);
+#else
+			// Unity 5.6 only supports 4 arguments. We safely drop the transitionTime.
+		animator.CrossFade(_hash, _fadeDuration, _layer, _offset);
+#endif
+
+			return true;
 	}
 
 	/// <summary>Cross-Fades towards Animation and waits till that Cross-Fade is finished.</summary>

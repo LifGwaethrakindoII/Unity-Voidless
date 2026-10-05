@@ -59,22 +59,22 @@ namespace Voidless
         /// <summary>Gets Position from Object.</summary>
         /// <param name="_object">Object's reference.</param>
         /// <param name="p">Object's position [as Vector3].</param>
-        public override Vector3 GetObjectPosition(T _object) { return GetObjectBoundary != null ? GetObjectBoundary(_object).position : Vector3.zero; }
+        public override Vector3 GetObjectPosition(T _object) { return GetObjectBoundary != null ? (Vector3)GetObjectBoundary(_object).position : Vector3.zero; }
 
         /// <summary>Gets Position from Object.</summary>
         /// <param name="_object">Object's reference.</param>
         /// <param name="d">Object's dimensions [as Vector3].</param>
-        public override Vector3 GetObjectDimensions(T _object) { return GetObjectBoundary != null ? GetObjectBoundary(_object).size : Vector3.zero; }
+        public override Vector3 GetObjectDimensions(T _object) { return GetObjectBoundary != null ? (Vector3)GetObjectBoundary(_object).size : Vector3.zero; }
 
         /// <summary>Gets Position from Object.</summary>
         /// <param name="_object">Object's reference.</param>
         /// <param name="p">Object's position [as Vector2].</param>
-        public override Vector2 GetObject2DPosition(T _object) { return GetObjectBoundary != null ? GetObjectBoundary(_object).position : Vector3.zero; }
+        public override Vector2 GetObject2DPosition(T _object) { return GetObjectBoundary != null ? (Vector3)GetObjectBoundary(_object).position : Vector3.zero; }
 
         /// <summary>Gets Position from Object.</summary>
         /// <param name="_object">Object's reference.</param>
         /// <param name="d">Object's dimensions [as Vector2].</param>
-        public override Vector2 GetObject2DDimensions(T _object) { return GetObjectBoundary != null ? GetObjectBoundary(_object).size : Vector3.zero; }
+        public override Vector2 GetObject2DDimensions(T _object) { return GetObjectBoundary != null ? (Vector3)GetObjectBoundary(_object).size : Vector3.zero; }
 
         /// <summary>Calculates distance between 2 objects.</summary>
         /// <param name="a">Object A.</param>

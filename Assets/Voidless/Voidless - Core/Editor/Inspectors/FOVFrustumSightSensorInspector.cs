@@ -5,29 +5,29 @@ using UnityEditor;
 
 namespace Voidless
 {
-[CustomEditor(typeof(FOVFrustumSightSensor))]
-[CanEditMultipleObjects]
-public class FOVFrustumSightSensorInspector : Editor
-{
-	private FOVFrustumSightSensor FOVfrustum; 	/// <summary>Inspector's Target.</summary>
-
-	/// <summary>Sets target property.</summary>
-	private void OnEnable()
+	[CustomEditor(typeof(FOVFrustumSightSensor))]
+	[CanEditMultipleObjects]
+	public class FOVFrustumSightSensorInspector : Editor
 	{
-		FOVfrustum = target as FOVFrustumSightSensor;
-	}
+		private FOVFrustumSightSensor FOVfrustum; 	/// <summary>Inspector's Target.</summary>
 
-	/// <summary>OnInspectorGUI override.</summary>
-	public override void OnInspectorGUI()
-	{	
-		DrawDefaultInspector();
-		if(FOVfrustum.FOVFrustumData != null)
+		/// <summary>Sets target property.</summary>
+		private void OnEnable()
 		{
-			EditorGUILayout.Space();
-			EditorGUILayout.LabelField(FOVfrustum.FOVFrustumData.ToString(), GUILayout.Height(100));
-			if(GUILayout.Button("Update FOV's Frustum")) FOVfrustum.UpdateFOVFrustum();
+			FOVfrustum = target as FOVFrustumSightSensor;
 		}
-		serializedObject.ApplyModifiedProperties();	
+
+		/// <summary>OnInspectorGUI override.</summary>
+		public override void OnInspectorGUI()
+		{	
+			DrawDefaultInspector();
+			if(FOVfrustum.FOVFrustumData != null)
+			{
+				EditorGUILayout.Space();
+				EditorGUILayout.LabelField(FOVfrustum.FOVFrustumData.ToString(), GUILayout.Height(100));
+				if(GUILayout.Button("Update FOV's Frustum")) FOVfrustum.UpdateFOVFrustum();
+			}
+			serializedObject.ApplyModifiedProperties();	
+		}
 	}
-}
 }

@@ -347,6 +347,12 @@ namespace Voidless
             }
         }
 
+        public static bool TryGetComponent<T>(this Transform transform, out T component)
+        {
+            component = transform.GetComponent<T>();
+            return component != null;
+        }
+
         #region TryGetComponentFunctions:
         /// <summary>Gets a reference to a component of type T on the same GameObject as the component specified, or any parent of the GameObject by using TryGetComponent.</summary>
         /// <param name="obj">GameObject to start looking the Component from.</param>

@@ -5,30 +5,30 @@ using UnityEditor;
 
 namespace Voidless
 {
-[CustomEditor(typeof(LevelMapGenerator))]
-public class LevelMapGeneratorInspector : Editor
-{
-	private LevelMapGenerator levelMapGenerator; 	/// <summary>Inspector's Target.</summary>
-
-	/// <summary>Sets target property.</summary>
-	void OnEnable()
+	[CustomEditor(typeof(LevelMapGenerator))]
+	public class LevelMapGeneratorInspector : Editor
 	{
-		levelMapGenerator = target as LevelMapGenerator;
-	}
+		private LevelMapGenerator levelMapGenerator; 	/// <summary>Inspector's Target.</summary>
 
-	/// <summary>OnInspectorGUI override.</summary>
-	public override void OnInspectorGUI()
-	{	
-		DrawDefaultInspector();
-
-		if(GUILayout.Button("Generate Map"))
+		/// <summary>Sets target property.</summary>
+		void OnEnable()
 		{
-			levelMapGenerator.GenerateMap();
+			levelMapGenerator = target as LevelMapGenerator;
 		}
-		if(GUILayout.Button("Reset"))
-		{
-			levelMapGenerator.Reset();
+
+		/// <summary>OnInspectorGUI override.</summary>
+		public override void OnInspectorGUI()
+		{	
+			DrawDefaultInspector();
+
+			if(GUILayout.Button("Generate Map"))
+			{
+				levelMapGenerator.GenerateMap();
+			}
+			if(GUILayout.Button("Reset"))
+			{
+				levelMapGenerator.Reset();
+			}
 		}
 	}
-}
 }

@@ -3,7 +3,7 @@ using UnityEditor.Recorder;
 using UnityEditor;
 #endif
 
-namespace Voidless
+namespace Voidless.Recorder
 {
 	public static class VRecorder
 	{

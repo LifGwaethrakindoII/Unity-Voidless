@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Voidless
+namespace Voidless.OldInputSystem
 {
-public interface IInputControllerHandler : IJoystickAxesHandler, ITriggerAxesHandler, IInputReceiveHandler, IDPadAxesHandler
-{
-	
-}
+	public interface IInputControllerHandler : IJoystickAxesHandler, ITriggerAxesHandler, IInputReceiveHandler, IDPadAxesHandler
+	{
+		
+	}
 }

@@ -5,9 +5,9 @@ using UnityEditor;
 
 namespace Voidless
 {
-[CustomEditor(typeof(WaypointGenerator))]
-public class WaypointGeneratorInspector : BaseWaypointGeneratorInspector<WaypointGenerator, Waypoint>
-{
-	
-}
+	[CustomEditor(typeof(WaypointGenerator))]
+	public class WaypointGeneratorInspector : BaseWaypointGeneratorInspector<WaypointGenerator, Waypoint>
+	{
+		
+	}
 }

@@ -466,7 +466,8 @@ namespace Voidless
         /// <returns>Objects' iteration</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return objects != null ? objects.GetEnumerator() : null;
+            if(objects != null) return objects.GetEnumerator();
+            return null;
         }
 
         /// <summary>Iterates through objects.</summary>

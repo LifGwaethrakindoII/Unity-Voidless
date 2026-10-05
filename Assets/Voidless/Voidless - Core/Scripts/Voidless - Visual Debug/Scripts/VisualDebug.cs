@@ -81,7 +81,7 @@ namespace Voidless
 		/// <param name="d">Ray's Direction.</param>
 		/// <param name="c">Ray's Color [white by default].</param>
 		/// <param name="t">Time the Ray will last (DEFAULT_WAIT by default).</param>
-		public static void DrawRay(Vector3 o, Vector3 d, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawRay(Vector3 o, Vector3 d, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -100,7 +100,7 @@ namespace Voidless
 		/// <param name="b">Line's end point.</param>
 		/// <param name="c">Line's Color [white by default].</param>
 		/// <param name="t">Time the Line will last (DEFAULT_WAIT by default).</param>
-		public static void DrawLine(Vector3 a, Vector3 b, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawLine(Vector3 a, Vector3 b, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -121,7 +121,7 @@ namespace Voidless
 		/// <param name="t">Time the Line will last (DEFAULT_WAIT by default).</param>
 		/// <param name="f">Line Function.</param>
         /// <param name="s">Sample count.</param>
-		public static void DrawLine(Vector3 a, Vector3 b, Func<Vector3, Vector3, float, Vector3> f = null, int s = PoolLineRenderer.SAMPLES, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawLine(Vector3 a, Vector3 b, Func<Vector3, Vector3, float, Vector3> f = null, int s = PoolLineRenderer.SAMPLES, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -143,7 +143,7 @@ namespace Voidless
         /// <param name="s">Sample count.</param>
         /// <param name="c">LineRenderer's color.</param>
         /// /// <param name="w">Time the Line will last (DEFAULT_WAIT by default).</param>
-        public static void DrawProjectileProjection(Vector3 p0, Vector3 pf, float t, Vector3 g, int s = PoolLineRenderer.SAMPLES, Color c = default, float w = DEFAULT_WAIT)
+        public static void DrawProjectileProjection(Vector3 p0, Vector3 pf, float t, Vector3 g, int s = PoolLineRenderer.SAMPLES, Color c = default(Color), float w = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -162,7 +162,7 @@ namespace Voidless
 		/// <param name="r">Sphere's Radius.</param>
 		/// <param name="c">Sphere's Color [white by default].</param>
 		/// <param name="t">Time the Sphere will last (DEFAULT_WAIT by default).</param>
-		public static void DrawSphere(Vector3 p, float r, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawSphere(Vector3 p, float r, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -177,7 +177,7 @@ namespace Voidless
 		/// <param name="r">Box's Radius.</param>
 		/// <param name="c">Box's Color [white by default].</param>
 		/// <param name="t">Time the Box will last (DEFAULT_WAIT by default).</param>
-		public static void DrawBox(Vector3 p, Quaternion r, Vector3 s, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawBox(Vector3 p, Quaternion r, Vector3 s, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -192,7 +192,7 @@ namespace Voidless
 		/// <param name="r">Capsule's Radius.</param>
 		/// <param name="c">Capsule's Color [white by default].</param>
 		/// <param name="t">Time the Capsule will last (DEFAULT_WAIT by default).</param>
-		public static void DrawCapsule(Vector3 p, Quaternion rotation, float h, float r, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawCapsule(Vector3 p, Quaternion rotation, float h, float r, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -207,7 +207,7 @@ namespace Voidless
 		/// <param name="r">Cylinder's Radius.</param>
 		/// <param name="c">Cylinder's Color [white by default].</param>
 		/// <param name="t">Time the Cylinder will last (DEFAULT_WAIT by default).</param>
-		public static void DrawCylinder(Vector3 p, Quaternion rotation, float h, float r, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawCylinder(Vector3 p, Quaternion rotation, float h, float r, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -222,7 +222,7 @@ namespace Voidless
 		/// <param name="r">Text's Rotation.</param>
 		/// <param name="_contentPointer">Text's contentPointer [null by default].</param>
 		/// <param name="t">Time the Text will last (DEFAULT_WAIT by default).</param>
-		public static void DrawText(Vector3 p, Quaternion r, Func<string> _contentPointer = null, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawText(Vector3 p, Quaternion r, Func<string> _contentPointer = null, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -237,7 +237,7 @@ namespace Voidless
 		/// <param name="r">Text's Rotation.</param>
 		/// <param name="_content">Text's Content [empty by default].</param>
 		/// <param name="t">Time the Text will last (DEFAULT_WAIT by default).</param>
-		public static void DrawText(Vector3 p, Quaternion r, string _content = "", Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawText(Vector3 p, Quaternion r, string _content = "", Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -251,7 +251,7 @@ namespace Voidless
         /// <param name="_boxCollider">BoxCollider's reference.</param>
         /// <param name="c">Box's Color [white by default].</param>
         /// <param name="t">Time the Box will last (DEFAULT_WAIT by default).</param>
-        public static void DrawBoxCollider(BoxCollider _boxCollider, Color c = default, float t = DEFAULT_WAIT)
+        public static void DrawBoxCollider(BoxCollider _boxCollider, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -267,7 +267,7 @@ namespace Voidless
 		/// <param name="_sphereCollider">SphereCollider's reference.</param>
 		/// <param name="c">Sphere's Color [white by default].</param>
 		/// <param name="t">Time the Sphere will last (DEFAULT_WAIT by default).</param>
-		public static void DrawSphereCollider(SphereCollider _sphereCollider, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawSphereCollider(SphereCollider _sphereCollider, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -283,7 +283,7 @@ namespace Voidless
 		/// <param name="_capsuleCollider">CapsuleCollider's reference.</param>
 		/// <param name="c">Capsule's Color [white by default].</param>
 		/// <param name="t">Time the Capsule will last (DEFAULT_WAIT by default).</param>
-		public static void DrawCapsuleCollider(CapsuleCollider _capsuleCollider, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawCapsuleCollider(CapsuleCollider _capsuleCollider, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -299,7 +299,7 @@ namespace Voidless
 		/// <param name="_capsuleCollider">CylinderCollider's reference.</param>
 		/// <param name="c">Cylinder's Color [white by default].</param>
 		/// <param name="t">Time the Cylinder will last (DEFAULT_WAIT by default).</param>
-		public static void DrawCylinderCollider(CapsuleCollider _capsuleCollider, Color c = default, float t = DEFAULT_WAIT)
+		public static void DrawCylinderCollider(CapsuleCollider _capsuleCollider, Color c = default(Color), float t = DEFAULT_WAIT)
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return;
@@ -428,7 +428,7 @@ namespace Voidless
 		/// <summary>Requests Pool-LineRenderer from Pool.</summary>
 		/// <param name="c">LineRenderer's Color (white by default).</param>
 		/// <returns>Pool-LineRenderer.</returns>
-		public static PoolLineRenderer RequestLineRenderer(Color c = default)
+		public static PoolLineRenderer RequestLineRenderer(Color c = default(Color))
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return null;
@@ -437,7 +437,7 @@ namespace Voidless
 
 			if(lineRenderer == null) return null;
 
-			lineRenderer.SetColor(c == default ? COLOR_DEFAULT : c);
+			lineRenderer.SetColor(c == default(Color) ? COLOR_DEFAULT : c);
 			return lineRenderer;
 #else
 			return null;
@@ -449,7 +449,7 @@ namespace Voidless
 		/// <param name="p">Primitive's position.</param>
 		/// <param name="r">Primitive's rotation.</param>
 		/// <param name="c">Primitive's color.</param>
-		private static PoolPrimitive RequestPrimitive(GameObjectPool<PoolPrimitive> pool, Vector3 p, Quaternion r, Color c = default)
+		private static PoolPrimitive RequestPrimitive(GameObjectPool<PoolPrimitive> pool, Vector3 p, Quaternion r, Color c = default(Color))
 		{
 #if UNITY_EDITOR
 			if(Instance == null || pool == null) return null;
@@ -458,7 +458,7 @@ namespace Voidless
 			
 			if(primitive == null) return null;
 
-			primitive.SetColor(c == default ? COLOR_DEFAULT : c);
+			primitive.SetColor(c == default(Color) ? COLOR_DEFAULT : c);
 			return primitive;
 #else
 			return null;
@@ -469,7 +469,7 @@ namespace Voidless
 		/// <param name="p">Box's position.</param>
 		/// <param name="r">Box's radius.</param>
 		/// <param name="c">Box's color.</param>
-		public static PoolPrimitive RequestBoxPrimitive(Vector3 p, Quaternion r, Vector3 s, Color c = default)
+		public static PoolPrimitive RequestBoxPrimitive(Vector3 p, Quaternion r, Vector3 s, Color c = default(Color))
 		{
 #if UNITY_EDITOR
 			PoolPrimitive box = RequestPrimitive(Instance.BoxPool, p, r, c);
@@ -487,7 +487,7 @@ namespace Voidless
 		/// <param name="p">Sphere's position.</param>
 		/// <param name="r">Sphere's radius.</param>
 		/// <param name="c">Sphere's color.</param>
-		public static PoolPrimitive RequestSpherePrimitive(Vector3 p, float r, Color c = default)
+		public static PoolPrimitive RequestSpherePrimitive(Vector3 p, float r, Color c = default(Color))
 		{
 #if UNITY_EDITOR
 			PoolPrimitive sphere = RequestPrimitive(Instance.SpherePool, p, Quaternion.identity, c);
@@ -505,7 +505,7 @@ namespace Voidless
 		/// <param name="p">Capsule's position.</param>
 		/// <param name="r">Capsule's radius.</param>
 		/// <param name="c">Capsule's color.</param>
-		public static PoolPrimitive RequestCapsulePrimitive(Vector3 p, Quaternion rotation, float h, float r, Color c = default)
+		public static PoolPrimitive RequestCapsulePrimitive(Vector3 p, Quaternion rotation, float h, float r, Color c = default(Color))
 		{
 #if UNITY_EDITOR
 			PoolPrimitive capsule = RequestPrimitive(Instance.CapsulePool, p, rotation, c);
@@ -523,7 +523,7 @@ namespace Voidless
 		/// <param name="p">Cylinder's position.</param>
 		/// <param name="r">Cylinder's radius.</param>
 		/// <param name="c">Cylinder's color.</param>
-		public static PoolPrimitive RequestCylinderPrimitive(Vector3 p, Quaternion rotation, float h, float r, Color c = default)
+		public static PoolPrimitive RequestCylinderPrimitive(Vector3 p, Quaternion rotation, float h, float r, Color c = default(Color))
 		{
 #if UNITY_EDITOR
 			PoolPrimitive cylinder = RequestPrimitive(Instance.CylinderPool, p, rotation, c);
@@ -541,7 +541,7 @@ namespace Voidless
 		/// <param name="p">Text's position.</param>
 		/// <param name="r">Text's radius.</param>
 		/// <param name="_contentPointer">Text's contentPointer [null by default].</param>
-		public static PoolText RequestText(Vector3 p, Quaternion r, Func<string> _contentPointer = null, Color c = default)
+		public static PoolText RequestText(Vector3 p, Quaternion r, Func<string> _contentPointer = null, Color c = default(Color))
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return null;
@@ -551,7 +551,7 @@ namespace Voidless
 			if(text == null) return null;
 
 			text.SetContentPointer(_contentPointer);
-			text.SetColor(c == default ? COLOR_DEFAULT: c);
+			text.SetColor(c == default(Color) ? COLOR_DEFAULT: c);
 			return text;
 #else
 			return null;
@@ -562,7 +562,7 @@ namespace Voidless
 		/// <param name="p">Text's position.</param>
 		/// <param name="r">Text's radius.</param>
 		/// <param name="_content">Text's content [empty by default].</param>
-		public static PoolText RequestText(Vector3 p, Quaternion r, string _content = "", Color c = default)
+		public static PoolText RequestText(Vector3 p, Quaternion r, string _content = "", Color c = default(Color))
 		{
 #if UNITY_EDITOR
 			if(Instance == null || !debug) return null;

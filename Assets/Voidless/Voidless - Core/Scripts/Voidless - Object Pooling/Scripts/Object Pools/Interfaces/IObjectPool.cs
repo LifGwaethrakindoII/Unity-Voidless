@@ -16,7 +16,11 @@ namespace Voidless
 {
 	public enum LimitHandling { None, RecycleRandom }
 
-	public interface IObjectPool<out T> : IEnumerable<T> where T : IPoolObject
+	public interface IObjectPool<
+#if UNITY_2018_1_OR_NEWER
+    out 
+#endif
+	T> : IEnumerable<T> where T : IPoolObject
 	{
 		/// <summary>Gets referenceObject property.</summary>
 		T referenceObject { get; }

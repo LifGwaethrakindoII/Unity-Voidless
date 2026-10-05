@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Voidless
+namespace Voidless.TMPro
 {
     public class PoolTextMeshProUGUI : PoolGameObject
     {

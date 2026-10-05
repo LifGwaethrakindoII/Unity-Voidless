@@ -110,7 +110,14 @@ namespace Voidless
 #endif
         private void TakeScreenshot(string name)
         {
-            ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screenshots/" + name + ".png");
+            string path = string.Concat(Application.dataPath, "/Screenshots/", name, ".png");
+
+#if UNITY_2017_1_OR_NEWER
+            ScreenCapture.CaptureScreenshot(path);
+#else
+            // Fallback for Unity 5.6
+            UnityEngine.Application.CaptureScreenshot(path);
+#endif
             AssetDatabase.Refresh();
         }
 

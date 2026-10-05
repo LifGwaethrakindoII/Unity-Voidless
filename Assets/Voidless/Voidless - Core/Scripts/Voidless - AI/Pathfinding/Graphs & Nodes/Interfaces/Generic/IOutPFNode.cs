@@ -6,6 +6,6 @@ namespace Voidless.AI.PathFinding
 {
     public interface IOutPFNode<out T>
     {
-        public T data { get; }
+        T data { get; }
     }
 }

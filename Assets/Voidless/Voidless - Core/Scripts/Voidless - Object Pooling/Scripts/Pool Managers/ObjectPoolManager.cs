@@ -18,7 +18,7 @@ namespace Voidless
 		private Queue<IEnumerator> _recycleRequests; 							/// <summary>Pool Object Recycling's Requests.</summary>
 		private Queue<IEnumerator> _deactivationRequests; 						/// <summary>Pool Objects Deactivation's Requests.</summary>
 		private Queue<IEnumerator> _dispatchRequests; 							/// <summary>Pool Objects Dispatch's Requests.</summary>
-		private Coroutine requestIterator; 										/// <summary>Request's iterator coroutine.</summary>
+		private Coroutine requestIterator;                                      /// <summary>Request's iterator coroutine.</summary>
 
 #region Getters/Setters:
 		/// <summary>Gets and Sets EvaluatePoolsClearanceAt property.</summary>
@@ -62,7 +62,9 @@ namespace Voidless
 			get { return _dispatchRequests; }
 			set { _dispatchRequests = value; }
 		}
-#endregion
+		#endregion
+
+#if UNITY_2018_1_OR_NEWER
 
 #region UnityMethods:
 		/// <summary>Subscribes to SceneManager's events.</summary>
@@ -108,7 +110,11 @@ namespace Voidless
 
 #endif
 
-			if(!poolDictionary.ContainsKey(instanceID)) poolDictionary.Add(instanceID, new GameObjectPool<T>(_poolObject, _size, _limit));
+			if (!poolDictionary.ContainsKey(instanceID))
+			{
+				GameObjectPool<T> newPool = new GameObjectPool<T>(_poolObject, _size, _limit);
+				poolDictionary.Add(instanceID, newPool);
+			}
 			else
 			DebugMessage(instanceID, LogType.Warning, "No Object Pool will be created.", true);
 		}
@@ -280,18 +286,6 @@ namespace Voidless
 
 			return poolDictionary.ContainsKey(instanceID) ? poolDictionary[instanceID].Count : 0;
 		}*/
-
-		/// <returns>Returns an enumerator T that iterates through the collection.</returns>
-		public IEnumerator<KeyValuePair<int, IObjectPool<IPoolObject>>> GetEnumerator()
-		{
-			return poolDictionary.GetEnumerator();
-		}
-
-		/// <summary>Returns an enumerator that iterates through the collection.</summary>
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
 
 		/// <returns>String representing this Object Pool's Manager.</returns>
 		public override string ToString()
@@ -496,5 +490,19 @@ namespace Voidless
 			yield return null;
 		}
 #endregion
+#endif
+
+		/// <returns>Returns an enumerator T that iterates through the collection.</returns>
+		public IEnumerator<KeyValuePair<int, IObjectPool<IPoolObject>>> GetEnumerator()
+		{
+			return poolDictionary.GetEnumerator();
+		}
+
+		/// <summary>Returns an enumerator that iterates through the collection.</summary>
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
+		}
+
 	}
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Voidless
+namespace Voidless.AddressableAssets
 {
 	[Serializable]
 	public class AudioClipAssetReference : VAssetReferenceT<AudioClip>

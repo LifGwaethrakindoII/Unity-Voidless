@@ -17,7 +17,9 @@ namespace Voidless
 		private const float MIN = 0.0f; 									/// <summary>Range's Minimum Value.</summary>
 		private const float MAX = 1.0f; 									/// <summary>Range's Maximum Value.</summary>
 
+#if ODIN_INSPECTOR
 		[InfoBox("@ToString()")]
+#endif
 		[SerializeField] private ProbabilityRange[] _probabilityRanges; 	/// <summary>Set of ProbabilityRanges.</summary>
 
 		/// <summary>Gets and Sets probabilityRanges property.</summary>

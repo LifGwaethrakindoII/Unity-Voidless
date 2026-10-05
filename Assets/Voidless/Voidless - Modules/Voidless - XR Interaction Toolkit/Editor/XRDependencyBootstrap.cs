@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Voidless.XR.Editor
 {
-
     [InitializeOnLoad]
     public static class XRDependencyBootstrap
     {

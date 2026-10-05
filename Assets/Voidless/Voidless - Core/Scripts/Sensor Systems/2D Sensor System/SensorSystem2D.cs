@@ -8,7 +8,12 @@ using Sirenix.OdinInspector;
 
 namespace Voidless
 {
-	public class SensorSystem2D : SerializedMonoBehaviour
+	public class SensorSystem2D :
+#if ODIN_INSPECTOR
+	SerializedMonoBehaviour
+#else
+	MonoBehaviour
+#endif
 	{
 		private const float RADIUS_SPHERE = 0.025f;
 

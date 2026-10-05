@@ -28,7 +28,7 @@ namespace Voidless
 			set { _active = value; }
 		}
 
-        public Transform ReferenceTransform => throw new NotImplementedException();
+        public Transform ReferenceTransform { get { throw new NotImplementedException(); } }
 
 #region IPoolObjectMethods:
         /// <summary>Independent Actions made when this Pool Object is being created.</summary>

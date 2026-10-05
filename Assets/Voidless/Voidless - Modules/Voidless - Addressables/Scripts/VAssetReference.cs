@@ -4,47 +4,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Voidless
+namespace Voidless.AddressableAssets
 {
-[Serializable]
-public class VAssetReference : AssetReference, IEqualityComparer<VAssetReference>
-{
-	/// <summary>VAssetReference default constructor.</summary>
-	public VAssetReference(string guid) : base(guid) { /*...*/ }
-
-	/// <summary>Determines whether the specified objects are equal.</summary>
-	/// <param name="a">AssetReference A.</param>
-	/// <param name="b">AssetReference B.</param>
-	public bool Equals(VAssetReference a, VAssetReference b)
+	[Serializable]
+	public class VAssetReference : AssetReference, IEqualityComparer<VAssetReference>
 	{
-		return a.GetKey() == b.GetKey();
-	}
+		/// <summary>VAssetReference default constructor.</summary>
+		public VAssetReference(string guid) : base(guid) { /*...*/ }
 
-	/// <returns>Returns a hash code for the specified object.</returns>
-	public int GetHashCode(VAssetReference reference)
-	{
-		return reference.RuntimeKey.GetHashCode();
-	}
+		/// <summary>Determines whether the specified objects are equal.</summary>
+		/// <param name="a">AssetReference A.</param>
+		/// <param name="b">AssetReference B.</param>
+		public bool Equals(VAssetReference a, VAssetReference b)
+		{
+			return a.GetKey() == b.GetKey();
+		}
 
-	/// <summary>Checks if another object is equal to this.</summary>
-	/// <param name="obj">Object to compare against.</param>
-	public override bool Equals(object obj)
-	{
-		VAssetReference r = obj as VAssetReference;
+		/// <returns>Returns a hash code for the specified object.</returns>
+		public int GetHashCode(VAssetReference reference)
+		{
+			return reference.RuntimeKey.GetHashCode();
+		}
 
-		return (r == null) ? false : this.GetKey() == r.GetKey();
-	}
+		/// <summary>Checks if another object is equal to this.</summary>
+		/// <param name="obj">Object to compare against.</param>
+		public override bool Equals(object obj)
+		{
+			VAssetReference r = obj as VAssetReference;
 
-	/// <returns>True if VAssetReference is valid [not empty].</returns>
-	public bool IsValid()
-	{
-		return RuntimeKeyIsValid();
-	}
+			return (r == null) ? false : this.GetKey() == r.GetKey();
+		}
 
-	/// <returns>Generates a number corresponding to the value of the object to support the use of a hash table.</returns>
-	public override int GetHashCode()
-	{
-		return this.GetKey().GetHashCode();
+		/// <returns>True if VAssetReference is valid [not empty].</returns>
+		public bool IsValid()
+		{
+			return RuntimeKeyIsValid();
+		}
+
+		/// <returns>Generates a number corresponding to the value of the object to support the use of a hash table.</returns>
+		public override int GetHashCode()
+		{
+			return this.GetKey().GetHashCode();
+		}
 	}
-}
 }

@@ -252,11 +252,9 @@ namespace Voidless
                 if (child.gameObject.name == name) return child;
             }
 
-            switch (createIfNonExistent)
-            {
-                case true: return transform.CreateChildWithLocalProperties(name);
-                case false: return null;
-            }
+            if(createIfNonExistent) return transform.CreateChildWithLocalProperties(name);
+            
+			return null;
         }
     }
 }

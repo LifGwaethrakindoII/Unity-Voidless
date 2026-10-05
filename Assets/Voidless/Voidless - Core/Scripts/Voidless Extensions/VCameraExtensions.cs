@@ -12,7 +12,7 @@ using UnityEditor;
 ** Purpose: Extension methods & functions for Camera.
 **
 **
-** Author: Lîf Gwaethrakindo
+** Author: Lï¿½f Gwaethrakindo
 **
 ===========================================================================*/
 
@@ -122,7 +122,9 @@ namespace Voidless
 
             direction = direction.normalized;
 
-            return !Physics.Raycast(cameraPosition, direction, out _, Mathf.Max(cameraLength - 0.05f, 0.0f), _mask);
+            RaycastHit hitInfo = default(RaycastHit);
+
+            return !Physics.Raycast(cameraPosition, direction, out hitInfo, Mathf.Max(cameraLength - 0.05f, 0.0f), _mask);
         }
     }
 }

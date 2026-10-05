@@ -16,11 +16,11 @@ namespace Voidless.AI.PathFinding
             set { _nodeTree = value; }
         }
 
-        public override int Count => nodeTree != null && nodeTree.objects != null ? nodeTree.objects.Count : 0;
+        public override int Count { get { return nodeTree != null && nodeTree.objects != null ? nodeTree.objects.Count : 0; } }
 
         public PFOctaTreeGrid() : base()
         {
-            nodeTree = new OctaTree<PFNode>(default, n => n.boundary);
+            nodeTree = new OctaTree<PFNode>(default(Bounds), PFNode.GetBoundary);
         }
 
         /// <summary>Draws Gizmos.</summary>
@@ -35,7 +35,10 @@ namespace Voidless.AI.PathFinding
         }
         public override IEnumerator<ISPPFNode<Vector3, Bounds>> GetEnumerator()
         {
-            return nodeTree.GetEnumerator();
+            foreach (PFNode node in nodeTree)
+            {
+                yield return node;
+            }
         }
     }
 }

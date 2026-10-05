@@ -5,16 +5,16 @@ using UnityEditor;
 
 namespace Voidless
 {
-[CanEditMultipleObjects]
-[CustomEditor(typeof(EaseInEaseOutNormalizedPropertyFunction))]
-public class EaseInEaseOutNormalizedPropertyFunctionInspector : NormalizedPropertyFunctionInspector
-{
-	private EaseInEaseOutNormalizedPropertyFunction easeIneaseOutNormalizedPropertyFunction; 	/// <summary>Inspector's Target.</summary>
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(EaseInEaseOutNormalizedPropertyFunction))]
+	public class EaseInEaseOutNormalizedPropertyFunctionInspector : NormalizedPropertyFunctionInspector
+	{
+		private EaseInEaseOutNormalizedPropertyFunction easeIneaseOutNormalizedPropertyFunction; 	/// <summary>Inspector's Target.</summary>
 
-	/// <summary>OnInspectorGUI override.</summary>
-	public override void OnInspectorGUI()
-	{	
-		base.OnInspectorGUI();
+		/// <summary>OnInspectorGUI override.</summary>
+		public override void OnInspectorGUI()
+		{	
+			base.OnInspectorGUI();
+		}
 	}
-}
 }

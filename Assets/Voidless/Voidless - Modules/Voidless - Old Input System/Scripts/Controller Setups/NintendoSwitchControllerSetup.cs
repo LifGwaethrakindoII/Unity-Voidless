@@ -4,11 +4,11 @@ using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Voidless
+namespace Voidless.OldInputSystem
 {
-[Serializable]
-public class NintendoSwitchControllerSetup : BaseControllerSetup<NintendoSwitchButton>
-{
+	[Serializable]
+	public class NintendoSwitchControllerSetup : BaseControllerSetup<NintendoSwitchButton>
+	{
 //	Switch is in handheld mode or tabletop and Joy-Con attached to the console:
 //		- Joystick1...: Joy-Con attached to the Switch console.
 //		- Joystick1-9 Wireless Controllers 1-8
@@ -30,29 +30,29 @@ public class NintendoSwitchControllerSetup : BaseControllerSetup<NintendoSwitchB
 //		6th Axis: Right/Left Buttons
 //		7th Axis: Up/Down Buttons
 
-	/// \TODO THIS IS NOT CORRECT:
-	/// <summary>Gets leftAxisX property.</summary>
-	public override float leftAxisX { get { return Input.GetAxis("Horizontal"); } }
+		/// \TODO THIS IS NOT CORRECT:
+		/// <summary>Gets leftAxisX property.</summary>
+		public override float leftAxisX { get { return Input.GetAxis("Horizontal"); } }
 
-	/// <summary>Gets leftAxisY property.</summary>
-	public override float leftAxisY { get { return Input.GetAxis("Horizontal"); } }
+		/// <summary>Gets leftAxisY property.</summary>
+		public override float leftAxisY { get { return Input.GetAxis("Horizontal"); } }
 
-	/// <summary>Gets rightAxisX property.</summary>
-	public override float rightAxisX { get { return Input.GetAxis("Horizontal"); } }
+		/// <summary>Gets rightAxisX property.</summary>
+		public override float rightAxisX { get { return Input.GetAxis("Horizontal"); } }
 
-	/// <summary>Gets rightAxisY property.</summary>
-	public override float rightAxisY { get { return Input.GetAxis("Horizontal"); } }
+		/// <summary>Gets rightAxisY property.</summary>
+		public override float rightAxisY { get { return Input.GetAxis("Horizontal"); } }
 
-	/// <summary>Gets leftTrigger property.</summary>
-	public override float leftTrigger { get { return Input.GetAxis("Horizontal"); } }
+		/// <summary>Gets leftTrigger property.</summary>
+		public override float leftTrigger { get { return Input.GetAxis("Horizontal"); } }
 
-	/// <summary>Gets rightTrigger property.</summary>
-	public override float rightTrigger { get { return Input.GetAxis("Horizontal"); } }
+		/// <summary>Gets rightTrigger property.</summary>
+		public override float rightTrigger { get { return Input.GetAxis("Horizontal"); } }
 
-	/// <summary>Gets dPadAxisX property.</summary>
-	public override float dPadAxisX { get { return Input.GetAxis("Horizontal"); } }
+		/// <summary>Gets dPadAxisX property.</summary>
+		public override float dPadAxisX { get { return Input.GetAxis("Horizontal"); } }
 
-	/// <summary>Gets dPadAxisY property.</summary>
-	public override float dPadAxisY { get { return Input.GetAxis("Horizontal"); } }
-}
+		/// <summary>Gets dPadAxisY property.</summary>
+		public override float dPadAxisY { get { return Input.GetAxis("Horizontal"); } }
+	}
 }

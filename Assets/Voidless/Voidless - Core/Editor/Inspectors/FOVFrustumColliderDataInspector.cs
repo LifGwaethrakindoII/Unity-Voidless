@@ -5,29 +5,29 @@ using UnityEditor;
 
 namespace Voidless
 {
-[CustomEditor(typeof(FOVFrustumColliderData))]
-public class FOVFrustumColliderDataInspector : Editor
-{
-	private FOVFrustumColliderData FOVfrustumColliderData; 	/// <summary>Inspector's Target.</summary>
-
-	/// <summary>Sets target property.</summary>
-	private void OnEnable()
+	[CustomEditor(typeof(FOVFrustumColliderData))]
+	public class FOVFrustumColliderDataInspector : Editor
 	{
-		FOVfrustumColliderData = target as FOVFrustumColliderData;
-		EditorUtility.SetDirty(FOVfrustumColliderData);
-	}
+		private FOVFrustumColliderData FOVfrustumColliderData; 	/// <summary>Inspector's Target.</summary>
 
-	/// <summary>OnInspectorGUI override.</summary>
-	public override void OnInspectorGUI()
-	{	
-		//DrawDefaultInspector();
-		EditorGUILayout.LabelField(FOVfrustumColliderData.ToString(), GUILayout.Height(100));
-		if(GUILayout.Button("Configure"))
+		/// <summary>Sets target property.</summary>
+		private void OnEnable()
 		{
-			FOVFrustumMeshCreationWindow.CreateFOVFrustumMeshCreationWindow();
-			FOVFrustumMeshCreationWindow.LoadFOVData(FOVfrustumColliderData);
+			FOVfrustumColliderData = target as FOVFrustumColliderData;
+			EditorUtility.SetDirty(FOVfrustumColliderData);
 		}
-		serializedObject.ApplyModifiedProperties();
+
+		/// <summary>OnInspectorGUI override.</summary>
+		public override void OnInspectorGUI()
+		{	
+			//DrawDefaultInspector();
+			EditorGUILayout.LabelField(FOVfrustumColliderData.ToString(), GUILayout.Height(100));
+			if(GUILayout.Button("Configure"))
+			{
+				FOVFrustumMeshCreationWindow.CreateFOVFrustumMeshCreationWindow();
+				FOVFrustumMeshCreationWindow.LoadFOVData(FOVfrustumColliderData);
+			}
+			serializedObject.ApplyModifiedProperties();
+		}
 	}
-}
 }

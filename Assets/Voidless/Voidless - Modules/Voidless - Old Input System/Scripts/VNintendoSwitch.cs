@@ -6,7 +6,7 @@ using UnityEngine;
 using nn.hid;
 #endif
 
-namespace Voidless
+namespace Voidless.OldInputSystem
 {
 	[Flags]
 	public enum NintendoSwitchButton

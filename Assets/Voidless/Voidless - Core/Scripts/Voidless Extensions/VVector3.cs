@@ -43,6 +43,11 @@ namespace Voidless
 			};
 		}
 
+		public static float MaxComponent(this Vector3 v)
+		{
+			return Mathf.Max(v.x, v.y, v.z);
+		}
+
 	#region ComponentFunctions:
 		/// <summary>Calculates a constrained direction given an Axes3D's flag.</summary>
 		/// <param name="a">Vector A.</param>

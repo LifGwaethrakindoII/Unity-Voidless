@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_2017_2_OR_NEWER
+    using Vector3Int = UnityEngine.Vector3Int;
+#else
+    using Vector3Int = Voidless.Vector3Int;
+#endif
+
 namespace Voidless.AI.PathFinding
 {
     public class PFGrid : PFGraph

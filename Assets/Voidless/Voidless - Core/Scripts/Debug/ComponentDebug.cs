@@ -26,23 +26,23 @@ namespace Voidless
 
 		void Report() {
 			if ( componentsList == null || componentsList.Length == 0 ) {
-				Debug.LogWarning( $" [[ COMPONENT DEBUG ]] Array of components suddenly null or empty after start!" );
+				Debug.LogWarning( "[ComponentDebug] Array of components suddenly null or empty after start!" );
 				// No components set, destroy self.
 				Destroy( this );
 				return;
 			}
 
-			string debugStr = " [[ COMPONENT DEBUG ]]\n";
+			string debugStr = " [ComponentDebug]\n";
 			for ( int i = 0; i < componentsList.Length; i++ ) {
 				var x = componentsList[i];
 				if ( x != null )
-					debugStr += $" -- Component: {x.GetType().Name} on object {x.name}<-{x.transform.parent?.name}<-{x.transform.parent?.parent?.name}, enabled: {x.isActiveAndEnabled}\n";
+					debugStr += string.Concat(" -- Component:", x.GetType().Name, " on object ", x.name, "<-", x.transform.parent?.name, "<-", x.transform.parent?.parent?.name, "enabled: ", x.isActiveAndEnabled, "\n");
 				else
-					debugStr += $" -- COMPONENT AT INDEX {i} IS SUDDENLY NULL!\n";
+					debugStr += string.Concat("COMPONENT AT INDEX ", i, " IS SUDDENLY NULL!\n");
 
 				if (i > 0 && i % 5 == 0 ) {
 					Debug.Log( debugStr );
-					debugStr = " [[ COMPONENT DEBUG ]]\n";
+					debugStr = " [ComponentDebug]\n";
 				}
 			}
 

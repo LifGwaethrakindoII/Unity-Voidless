@@ -32,10 +32,17 @@ namespace Voidless
 			// Calculate the rotation from "from" to "to"
 			Quaternion deltaRotation = b * Quaternion.Inverse(a);
 
+			float deltaPitch;
+			float deltaYaw;
+			float deltaRoll;
+			Vector3 deltaPitchAxis;
+			Vector3 deltaYawAxis;
+			Vector3 deltaRollAxis;
+
 			// Convert the delta rotation to angles and axes
-			deltaRotation.ToAngleAxis(out float deltaPitch, out Vector3 deltaPitchAxis);
-			deltaRotation.ToAngleAxis(out float deltaYaw, out Vector3 deltaYawAxis);
-			deltaRotation.ToAngleAxis(out float deltaRoll, out Vector3 deltaRollAxis);
+			deltaRotation.ToAngleAxis(out deltaPitch, out deltaPitchAxis);
+			deltaRotation.ToAngleAxis(out deltaYaw, out deltaYawAxis);
+			deltaRotation.ToAngleAxis(out deltaRoll, out deltaRollAxis);
 
 			// Ensure that the angles are within the range (-180, 180]
 			deltaPitch = Mathf.DeltaAngle(0, deltaPitch);
@@ -89,6 +96,27 @@ namespace Voidless
 			averageQuaternion.Normalize();
 
 			return averageQuaternion;
+		}
+
+		/// <summary>(For Unity 5.6.5f1).</summary>
+		/// <param name="q"></param>
+		/// <returns></returns>
+		public static Quaternion Normalize(this Quaternion q)
+		{
+			float num = Mathf.Sqrt(q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w);
+			if (num < Mathf.Epsilon)
+			{
+				q = Quaternion.identity;
+			}
+			else
+			{
+				q.x /= num;
+				q.y /= num;
+				q.z /= num;
+				q.w /= num;
+			}
+
+			return q;
 		}
 
 		/// <summary>Gets the rotations (Quaternion) from a list of Transforms.</summary>

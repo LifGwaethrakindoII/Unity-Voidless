@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace Voidless
@@ -10,7 +7,7 @@ namespace Voidless
         private bool _dontDestroyOnLoad;
         private bool _active;
 
-        public Transform ReferenceTransform => throw new System.NotImplementedException();
+        public Transform ReferenceTransform { get { throw new System.NotImplementedException(); } }
 
         /// <summary>Gets and Sets dontDestroyOnLoad property.</summary>
 		public bool dontDestroyOnLoad

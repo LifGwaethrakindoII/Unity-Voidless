@@ -382,8 +382,14 @@ namespace Voidless
         /// <summary>Builds a String that contains information of each item of a Collection.</summary>
         /// <param name="_collection">Given Collection.</param>
         /// <returns>String representing each item of given Collection.</returns>
-        public static string  ReadOnlyCollectionToString<T>(this IReadOnlyCollection<T> _collection, bool _appendLine = true)
-        {
+        public static string  ReadOnlyCollectionToString<T>(this
+#if UNITY_2018_3_OR_NEWER
+    	IReadOnlyCollection<T> 
+#else
+		ICollection<T>
+#endif
+		_collection, bool _appendLine = true)
+		{
             if (_collection == null || _collection.Count == 0) return "[EMPTY COLLECTION]";
 
             StringBuilder builder = new StringBuilder();
@@ -488,11 +494,25 @@ namespace Voidless
 			builder.Append(", CanWrite = ");
 			builder.Append(_info.CanWrite.ToString());
 			builder.Append(", CustomAttributes = ");
-			builder.Append(_info.CustomAttributes.ToString());
+#if UNITY_2018_1_OR_NEWER
+            // Modern .NET 4.6+ property
+            builder.Append(_info.CustomAttributes.ToString());
+#else
+			// Unity 5.6 fallback: Use the legacy method
+			builder.Append(_info.GetCustomAttributes(false).ToString());
+#endif
+
 			builder.Append(", DeclaringType = ");
 			builder.Append(_info.DeclaringType.ToString());
 			builder.Append(", GetMethod = ");
-			builder.Append(_info.GetMethod.ToString());
+#if UNITY_2018_1_OR_NEWER
+            // Modern .NET 4.6+ property
+            builder.Append(_info.GetMethod.ToString());
+#else
+			// Unity 5.6 fallback: Use the legacy method
+			MethodInfo getMethod = _info.GetGetMethod();
+			builder.Append(getMethod != null ? getMethod.ToString() : "null");
+#endif
 			builder.Append(", IsSpecialName = ");
 			builder.Append(_info.IsSpecialName.ToString());
 			builder.Append(", MemberType = ");
@@ -507,8 +527,15 @@ namespace Voidless
 			builder.Append(_info.PropertyType.ToString());
 			builder.Append(", ReflectedType = ");
 			builder.Append(_info.ReflectedType.ToString());
-			/*builder.Append(", SetMethod = ");
-			builder.Append(_info.SetMethod.ToString());*/
+            builder.Append(", SetMethod = ");
+#if UNITY_2018_1_OR_NEWER
+            builder.Append(_info.SetMethod.ToString());
+#else
+            MethodInfo setMethod = _info.GetSetMethod();
+            builder.Append(setMethod != null ? setMethod.ToString() : "null");
+#endif
+            
+
 			builder.Append(" }");
 
 			return builder.ToString();

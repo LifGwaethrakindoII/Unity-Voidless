@@ -390,8 +390,11 @@ namespace Voidless
         private void TransformMoveRotation(Quaternion rotation)
         {
             // Calculate the rotation delta and normalize it
+            float angle;
+            Vector3 axis;
+            
             Quaternion deltaRotation = rotation * Quaternion.Inverse(rotation);
-            deltaRotation.ToAngleAxis(out float angle, out Vector3 axis);
+            deltaRotation.ToAngleAxis(out angle, out axis);
             axis.Normalize();
 
             // Apply drag to the angular velocity

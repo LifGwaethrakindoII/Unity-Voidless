@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Voidless
+namespace Voidless.AddressableAssets
 {
-[Serializable]
-public class FiniteStateAudioClipAssetReference : VAssetReferenceT<FiniteStateAudioClip>
-{
-	/// <summary>FiniteStateAudioClipAssetReference default constructor.</summary>
-	public FiniteStateAudioClipAssetReference(string guid) : base(guid) { /*...*/ }
-}
+	[Serializable]
+	public class FiniteStateAudioClipAssetReference : VAssetReferenceT<FiniteStateAudioClip>
+	{
+		/// <summary>FiniteStateAudioClipAssetReference default constructor.</summary>
+		public FiniteStateAudioClipAssetReference(string guid) : base(guid) { /*...*/ }
+	}
 }

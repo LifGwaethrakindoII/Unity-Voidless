@@ -220,30 +220,6 @@ public static class VInterfaces
 		return condition != null ? condition(_agent) : false;
 	}
 
-	/// <summary>Utility function to subscribe object implementing IInputControllerHandler to InputController's events.</summary>
-	/// <param name="_controllerHandler">IInputControllerHandler object to subscribe to events.</param>
-	public static void SubscribeToInputControllerEvents(this IInputControllerHandler _controllerHandler)
-	{
-		InputController.onInputReceived += _controllerHandler.OnInputReceived;
-		InputController.onRightAxesChange += _controllerHandler.OnRightAxesChange;
-		InputController.onLeftAxesChange += _controllerHandler.OnLeftAxesChange;
-		InputController.onRightTriggerAxisChange += _controllerHandler.OnRightTriggerAxisChange;
-		InputController.onLeftTriggerAxisChange += _controllerHandler.OnLeftTriggerAxisChange;
-		InputController.onDPadAxesChanges += _controllerHandler.OnDPadAxesChanges;
-	}
-
-	/// <summary>Utility function to unsubscribe object implementing IInputControllerHandler to InputController's events.</summary>
-	/// <param name="_controllerHandler">IInputControllerHandler object to unsubscribe to events.</param>
-	public static void UnsubscribeToInputControllerEvents(this IInputControllerHandler _controllerHandler)
-	{
-		InputController.onInputReceived -= _controllerHandler.OnInputReceived;
-		InputController.onRightAxesChange -= _controllerHandler.OnRightAxesChange;
-		InputController.onLeftAxesChange -= _controllerHandler.OnLeftAxesChange;
-		InputController.onRightTriggerAxisChange -= _controllerHandler.OnRightTriggerAxisChange;
-		InputController.onLeftTriggerAxisChange -= _controllerHandler.OnLeftTriggerAxisChange;
-		InputController.onDPadAxesChanges -= _controllerHandler.OnDPadAxesChanges;
-	}
-
 	/// <summary>Subscribes to FOVSight's events.</summary>
 	/// <param name="_FOVListener">IFOVListener implementer to subscribe.</param>
 	/// <param name="_FOVSight">Sight to subscribe to.</param>

@@ -966,50 +966,6 @@ namespace Voidless
 			}
 		}
 
-		/// <summary>Begins an Input Mashing Sequence [With InputController's API].</summary>
-		/// <param name="inputID">KeyCode to press during the sequence.</param>
-		/// <param name="acceleration">Acceleration rate when the Input's ID is pressed in a frame (dividedd by the frame rate).</param>
-		/// <param name="decceleration">Decceleration rate when the Input's ID in not pressed in a frame (divided by the frame rate).</param>
-		/// <param name="minLimit">Minimum tolerance value.</param>
-		/// <param name="maxLimit">Max limit where the sequence is considered a success.</param>
-		/// <param name="onFailed">Optional Callback invoked when the sequence has failed [when the value passes the minimum limit].</param>
-		/// <param name="onSucceeded">Optional Callback invoked when the sequence has been successfully done.</param>
-		public static IEnumerator<float> InputMashingSequence(int inputID, float acceleration, float decceleration, float minLimit, float maxLimit, Action onFailed = null, Action onSucceeded = null)
-		{
-			if(InputController.Instance == null) yield break;
-
-			float current = 0.0f;
-			float progress = 0.0f;
-			bool inputEntered = false;
-			bool inputEnteredLastFrame = false;
-
-			while(current > minLimit && current < maxLimit)
-			{
-				inputEntered = InputController.InputBegin(inputID);
-
-				if(!inputEnteredLastFrame)
-				{
-					current += (inputEntered ? acceleration : -decceleration) * Time.deltaTime;
-					progress = Mathf.Clamp(VMath.RemapValueToNormalizedRange(current, minLimit, maxLimit), 0.0f, 1.0f);
-					inputEnteredLastFrame = inputEntered;
-				}
-				else inputEnteredLastFrame = false;
-
-				yield return progress;
-			}
-
-			if(current <= minLimit && onFailed != null)
-			{
-				progress = 0.0f;
-				onFailed();
-
-			} else if(current >= maxLimit && onSucceeded != null)
-			{
-				progress = 1.0f;
-				onSucceeded();
-			}
-		}
-
 		/// <summary>Runs multiple IEnumerators.</summary>
 		/// <param name="onFinished">Callback optionally invoked after all the iterations are finished.</param>
 		/// <param name="_iterators">Set of Iterators.</param>
@@ -1076,9 +1032,18 @@ namespace Voidless
 			*/
 
 			AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(_layerIndex);
-			AnimatorTransitionInfo transitionInfo = _animator.GetAnimatorTransitionInfo(_layerIndex);
+			float transitionDuration = 0.0f;
 
-			SecondsDelayWait wait = new SecondsDelayWait(transitionInfo.duration * info.length);
+#if UNITY_2017_3_OR_NEWER
+            AnimatorTransitionInfo transitionInfo = _animator.GetAnimatorTransitionInfo(_layerIndex);
+            transitionDuration = transitionInfo.duration;
+#else
+			// Unity 5.6 fallback: AnimatorTransitionInfo did not have a 'duration' property.
+			// We use the _fadeDuration parameter passed into the method, which is mathematically identical.
+			transitionDuration = _fadeDuration;
+#endif
+
+			SecondsDelayWait wait = new SecondsDelayWait(transitionDuration * info.length);
 
 			while(wait.MoveNext()) yield return null;
 
@@ -1173,9 +1138,18 @@ namespace Voidless
 			*/
 
 			AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(_layerIndex);
-			AnimatorTransitionInfo transitionInfo = _animator.GetAnimatorTransitionInfo(_layerIndex);
+			float transitionDuration = 0.0f;
 
-			SecondsDelayWait wait = new SecondsDelayWait(transitionInfo.duration * info.length);
+#if UNITY_2017_3_OR_NEWER
+            AnimatorTransitionInfo transitionInfo = _animator.GetAnimatorTransitionInfo(_layerIndex);
+            transitionDuration = transitionInfo.duration;
+#else
+			// Unity 5.6 fallback: AnimatorTransitionInfo did not have a 'duration' property.
+			// We use the _fadeDuration parameter passed into the method, which is mathematically identical.
+			transitionDuration = _fadeDuration;
+#endif
+
+			SecondsDelayWait wait = new SecondsDelayWait(transitionDuration * info.length);
 
 			while(wait.MoveNext()) yield return null;
 
@@ -1315,8 +1289,16 @@ namespace Voidless
 			using(var request = UnityWebRequest.Head(server))
 			{
 				request.timeout = 5;
-				yield return request.SendWebRequest();
-				result = !request.isNetworkError && !request.isHttpError && request.responseCode == 200;
+
+#if UNITY_2017_2_OR_NEWER
+                yield return request.SendWebRequest();
+                result = !request.isNetworkError && !request.isHttpError && request.responseCode == 200;
+#else
+				// Unity 5.6 fallback
+				yield return request.Send();
+				// In 5.6, 'isError' was the catch-all for both network and HTTP errors
+				result = !request.isError && request.responseCode == 200;
+#endif
 			}
 
 			onResponse(result);

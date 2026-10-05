@@ -7,15 +7,15 @@ using UnityEditor;
 
 namespace Voidless
 {
-public static class SublimeTextUtilities
-{
-	//[MenuItem("Voidless/Sublime Text Utilities/Create Sublime Project")]
-	public static void CreateSublimeProject()
+	public static class SublimeTextUtilities
 	{
-		Debug.Log("[SublimeTextUtilities] Creating Window for Sublime-Project Creation for project " + VString.GetProjectName());
-		Debug.Log("[SublimeTextUtilities] Project Path: " + VString.GetProjectPath());
+		//[MenuItem("Voidless/Sublime Text Utilities/Create Sublime Project")]
+		public static void CreateSublimeProject()
+		{
+			Debug.Log("[SublimeTextUtilities] Creating Window for Sublime-Project Creation for project " + VString.GetProjectName());
+			Debug.Log("[SublimeTextUtilities] Project Path: " + VString.GetProjectPath());
+		}
 	}
-}
 }
 
 /*

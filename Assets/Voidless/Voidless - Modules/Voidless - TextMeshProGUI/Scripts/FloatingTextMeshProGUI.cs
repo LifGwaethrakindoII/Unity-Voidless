@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-namespace Voidless
+namespace Voidless.TMPro
 {
     public class FloatingTextMeshProGUI : FloatingGUIElement
     {

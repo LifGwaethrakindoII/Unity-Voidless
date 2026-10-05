@@ -46,9 +46,9 @@ namespace Voidless
 
         /// <summary>Sets Text's color.</summary>
         /// <param name="color">Text's color.</param>
-        public void SetColor(Color color = default)
+        public void SetColor(Color color = default(Color))
         {
-            textMesh.color = color == default ? Color.white : color;
+            textMesh.color = color == default(Color) ? Color.white : color;
         }
 
         /// <summary>Actions made when this Pool Object is being recycled.</summary>

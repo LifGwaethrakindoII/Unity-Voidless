@@ -16,7 +16,7 @@ namespace LGG
 {
 	public enum LimitHandling { None, RecycleRandom }
 
-	public interface IObjectPool<out T> : IEnumerable<T> where T : IPoolObject
+	public interface IObjectPool<T> : IEnumerable<T> where T : IPoolObject
 	{
 		/// <summary>Gets referenceObject property.</summary>
 		T referenceObject { get; }

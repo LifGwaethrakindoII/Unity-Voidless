@@ -2,8 +2,6 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.XR.Oculus;
-using Unity.XR.CoreUtils;
 
 /*===========================================================================
 **
@@ -30,9 +28,9 @@ namespace Voidless.AI.PathFinding
             set { _octaTree = value; }
         }
 
-        public virtual int Count => octaTree != null ? octaTree.Count : 0;
+        public virtual int Count { get { return octaTree != null ? octaTree.Count : 0; } }
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly { get { throw new NotImplementedException(); } }
 
         public PFGraph()
         {
@@ -71,7 +69,10 @@ namespace Voidless.AI.PathFinding
 
         public virtual IEnumerator<ISPPFNode<Vector3, Bounds>> GetEnumerator()
         {
-            return octaTree.GetEnumerator();
+            foreach (PFNode node in octaTree)
+            {
+                yield return node;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -125,8 +126,8 @@ namespace Voidless.AI.PathFinding
         {
             Func<PFNode, GizmosDrawParameters> g = (n) =>
             {
-                Color c;
-                GizmosDrawMode m;
+                Color c = default(Color);
+                GizmosDrawMode m = GizmosDrawMode.Wired;
 
                 switch (n.traversable)
                 {
